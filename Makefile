@@ -31,3 +31,6 @@ server:
 
 update:
 	$(RUN_JEKYLL) bundle update
+
+deploy:
+	bundle exec jekyll build
