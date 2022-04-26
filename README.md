@@ -6,6 +6,8 @@ All actions are handled through the `Makefile`, so you can run `make build` and 
 
 I'm currently using Netlify to deploy, so we can use `make deploy` for that command.
 
+Also worth noting, on one machine I kept running into a dependency problem where webrick was required, so that is added to the Gemfile.
+
 ## Domain Registration
 silentlyfailing is currently registered with AWS, so I have a CNAME and A record set up in Route53 to handle the redirects to netlify servers. Netlify uses Let's Encrypt to handle the SSL/TLS cert.
 
