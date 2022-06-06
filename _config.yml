@@ -9,12 +9,16 @@
 title: Silently Failing
 
 # Your name to show in the footer
-author: Someone named Mike
+author: Michael McIntyre
 
 # --- List of links in the navigation bar --- #
 
 navbar-links:
+  Home: "/"
+  Blog: "blog"
+  Book Reviews: "books"
   About Me: "aboutme"
+
   # Author's home: ""
 
 # --- Logo --- #
@@ -37,29 +41,29 @@ round-avatar: true
 social-network-links:
   email: "mfmcintyre01@gmail.com"
   rss: true # remove this line if you don't want to show an RSS link at the bottom
-  facebook:
-  github:
-  twitter:
-  patreon:
-  youtube:
-#  medium: yourname
-#  reddit: yourname
-#  linkedin: daattali
-#  xing: yourname
-#  stackoverflow: "3943160/daattali"
-#  snapchat: deanat78
-#  instagram: deanat78
-#  spotify: yourname
-#  telephone: +14159998888
-#  steam: deanat78
-#  twitch: yourname
-#  yelp: yourname
-#  telegram: yourname
-#  calendly: yourname
+  # facebook:
+  # github:
+  # twitter:
+  # patreon:
+  # youtube:
+#  medium:
+#  reddit:
+#  linkedin:
+#  xing:
+#  stackoverflow:
+#  snapchat:
+#  instagram:
+#  spotify:
+#  telephone:
+#  steam:
+#  twitch:
+#  yelp:
+#  telegram:
+#  calendly:
 #  mastodon: instance.url/@username
-#  ORCID: your ORCID ID
-#  google-scholar: your google scholar
-#  discord: invite/invite_code or users/userid
+#  ORCID:
+#  google-scholar:
+#  discord:
 
 # If you want your website to generate an RSS feed, provide a description
 # The URL for the feed will be https://<your_website>/feed.xml
@@ -162,7 +166,8 @@ google_analytics: G-03CRWXEDNW
 # (3) Install the Utterances app in your repository https://github.com/apps/utterances
 # See more details about the parameters below at https://utteranc.es/
 #utterances:
-#  repository: # GitHub username/repository eg. "daattali/beautiful-jekyll"
+
+repository: mmcintyre1/silently-failing
 #  issue-term: title   # Mapping between blog posts and GitHub issues
 #  theme: github-light # Utterances theme
 #  label: blog-comments # Label that will be assigned to GitHub Issues created by Utterances
@@ -220,14 +225,16 @@ kramdown:
 # Default YAML values (more information on Jekyll's site)
 defaults:
   - scope:
-      path: ""
+      path: "_posts"
       type: "posts"
     values:
       layout: "post"
       comments: true # add comments to all blog posts
       social-share: true # add social media sharing buttons to all blog posts
+
   - scope:
       path: "" # any file that's not a post will be a "page" layout by default
+      type: "pages"
     values:
       layout: "page"
 
