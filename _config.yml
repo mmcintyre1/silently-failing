@@ -41,40 +41,19 @@ round-avatar: true
 social-network-links:
   email: "mfmcintyre01@gmail.com"
   rss: true # remove this line if you don't want to show an RSS link at the bottom
-  # facebook:
-  # github:
+  github: mmcintyre1
   # twitter:
-  # patreon:
-  # youtube:
-#  medium:
-#  reddit:
 #  linkedin:
-#  xing:
-#  stackoverflow:
-#  snapchat:
-#  instagram:
-#  spotify:
-#  telephone:
-#  steam:
-#  twitch:
-#  yelp:
-#  telegram:
-#  calendly:
-#  mastodon: instance.url/@username
-#  ORCID:
-#  google-scholar:
-#  discord:
 
 # If you want your website to generate an RSS feed, provide a description
 # The URL for the feed will be https://<your_website>/feed.xml
 rss-description: A website in a sea of them
 
 # --- General options --- #
-
 # Select which social network share links to show in posts
 share-links-active:
   twitter: true
-  facebook: true
+  facebook: false
   linkedin: true
   vk: false
 
@@ -95,7 +74,7 @@ feed_show_tags: true
 post_search: true
 
 # The keywords to associate with your website, for SEO purposes
-#keywords: "my,list,of,keywords"
+keywords: "book-reviews,tech"
 
 # --- Colours / background image --- #
 
@@ -216,7 +195,7 @@ date_format: "%B %-d, %Y"
 timezone: "America/Toronto"
 markdown: kramdown
 highlighter: rouge
-permalink: /:year-:month-:day-:title/
+permalink: /:title/
 paginate: 5
 
 kramdown:
