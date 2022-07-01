@@ -3,12 +3,18 @@ layout: post
 title: "Book Review: Turn The Ship Around!"
 subtitle:
 cover-img:
-thumbnail-img: /assets/img/turn-the-ship-around-cover.jpg
-share-img: /assets/img/turn-the-ship-around-cover.jpg
+thumbnail-img: /assets/img/turn-the-ship-around.jpg
+share-img: /assets/img/turn-the-ship-around.jpg
 readtime: true
 tags: ["book-review", "business-book"]
 ---
-![Turn The Ship Around Cover Image](/assets/img/turn-the-ship-around-cover.jpg){: .mx-auto.d-block :}
+
+<div style="text-align:center">
+  <a href="/assets/img/turn-the-ship-around.jpg">
+    <img src="/assets/img/turn-the-ship-around.jpg" alt="ship-cover">
+  </a>
+</div>
+---
 
 > You may be able to “buy” a person’s back with a paycheck, position, power, or fear, but a human being’s genius, passion, loyalty, and tenacious creativity are volunteered only.
 
