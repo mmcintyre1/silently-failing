@@ -20,6 +20,9 @@ navbar-links:
   About Me: "aboutme"
 
   # Author's home: ""
+url: "https://silentlyfailing.com"
+baseurl: ""
+repository: mmcintyre1/silently-failing
 
 # --- Logo --- #
 
@@ -116,7 +119,7 @@ footer-hover-col: "#0085A1"
 #gtag: ""
 
 # Fill in your Google Analytics ID to track your website using Google Analytics
-#google_analytics: ""
+google_analytics: G-03CRWXEDNW
 
 # Fill in your Cloudflare Analytics beacon token to track your website using Cloudflare Analytics
 #cloudflare_analytics: ""
@@ -146,7 +149,6 @@ footer-hover-col: "#0085A1"
 # See more details about the parameters below at https://utteranc.es/
 #utterances:
 
-repository: mmcintyre1/silently-failing
 #  issue-term: title   # Mapping between blog posts and GitHub issues
 #  theme: github-light # Utterances theme
 #  label: blog-comments # Label that will be assigned to GitHub Issues created by Utterances
