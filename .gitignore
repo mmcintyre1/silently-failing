@@ -13,3 +13,9 @@ vendor/*
 
 beautiful-jekyll-theme-*.gem
 .jekyll-metadata
+
+# vs code files
+.vscode
+
+# WSL/Windows files
+*Zone.Identifier*
