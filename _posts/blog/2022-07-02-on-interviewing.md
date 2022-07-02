@@ -1,12 +1,15 @@
 ---
 layout: post
 title: "On Interviewing"
-subtitle: How to choose the right candidates
+subtitle: Some thoughts on interviewing, biases, and hiring the right candidates
 cover-img:
 thumbnail-img:
 share-img:
 readtime: true
 tags: ["blog", "business"]
+permalink: /blog/on-interviewing
+tags: ["book-review", "tech-book"]
+date: 2022-07-02 12:00:00 -0500
 ---
 
  "In technology", as Marissa Mayer, former CEO of Yahoo, says, "it’s about the people -- getting the best people, retaining them, nurturing a creative environment, and helping to find a way to innovate”. We've all been on teams with the wrong people; you know the sort. Those who you dread messaging when you see their name pop up as the last committer to the file with a bug, those who sap enthusiasm, who seem to hate their jobs out loud. Or, you've managed a team that just doesn't seem to perform, that spends hours tripping over minor hurtles when resolving a production incident to restore a database, or recoils at any mention of accountability or pride of ownership in the work they do.
