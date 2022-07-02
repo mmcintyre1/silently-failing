@@ -16,3 +16,6 @@ beautiful-jekyll-theme-*.gem
 
 # vs code files
 .vscode
+
+# WSL/Windows files
+*Zone.Identifier*
