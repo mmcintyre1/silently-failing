@@ -1,12 +1,14 @@
 ---
 layout: post
 title: "Book Review: Turn The Ship Around!"
-subtitle:
+subtitle: This book answers the question of what The Hunt for Red October would look like if you swapped Sean Connery with Edward Demings.
 cover-img:
 thumbnail-img: /assets/img/turn-the-ship-around.jpg
 share-img: /assets/img/turn-the-ship-around.jpg
 readtime: true
+permalink: /book-review/turn-the-ship-around
 tags: ["book-review", "business-book"]
+date: 2022-05-21 12:00:00 -0500
 ---
 
 <div style="text-align:center">
