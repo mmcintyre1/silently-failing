@@ -5,9 +5,9 @@ subtitle:
 thumbnail-img: "/assets/img/start-with-why.jpg"
 readtime: true
 show_excerpt: true
-permalink: /book-review/start-with-why
+permalink: /books/start-with-why
 tags: ["book-review", "self-help book", "leadership"]
-date: 2022-07-05 12:00:00 -0500
+date: 2022-07-04 12:00:00 -0500
 ---
 
 <div style="text-align:center">
@@ -30,6 +30,9 @@ These sorts of superficial examples thread what is generally a poorly organized 
 The book posits a hierarchical leadership, with a heliocentric Mussolini-type in the center appealing to raw emotion. The phenomenology of success then is a conflation of the marketing of a product to the cult of personality of a brand's leader, and Sinek employs thinly researched straw-men to justify this world-view. The central truism, that why you do what you do matters as much or more than what you do, is padded by hundreds of mind-numblingly useless pages riddled with post-facto arguments and survivor bias. Sinek builds a one-in-a-million ubermensch of a leader and claims that that target is an inspiration. Being a once-in-a-lifetime visionary who can change an industry is nice, but sometimes you are just selling used cars, and car is just a car.
 
 ---
-[^fn1]: <sub>This book came out within three years of the Da Vinci code and perhaps a collective buzz around the golden ratio, so perhaps to lend some psuedo-scientific gleam to the work, Sinek has co-opted an art term.</sub>
-[^fn2]: <sub>Netflix and other streaming companies cut out the cable box entirely.</sub>
-[^fn3]: <sub>By a simple case-sensitive count, WHY occurs 537 times, WHAT 196, and HOW a refreshing 120 times.</sub>
+
+<h2>Footnotes</h2>
+
+[^fn1]: This book came out within three years of the Da Vinci code and perhaps a collective buzz around the golden ratio, so perhaps to lend some psuedo-scientific gleam to the work, Sinek has co-opted an art term.
+[^fn2]: Netflix and other streaming companies cut out the cable box entirely.
+[^fn3]: By a simple case-sensitive count, WHY occurs 537 times, WHAT 196, and HOW a refreshing 120 times.
