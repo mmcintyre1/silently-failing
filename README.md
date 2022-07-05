@@ -11,5 +11,8 @@ Also worth noting, on one machine I kept running into a dependency problem where
 ## Domain Registration
 silentlyfailing is currently registered with AWS, so I have a CNAME and A record set up in Route53 to handle the redirects to netlify servers. Netlify uses Let's Encrypt to handle the SSL/TLS cert.
 
+## Book Reviews
+Images for thumbnails are ~340 X 500.
+
 ## TODO
 Write!
