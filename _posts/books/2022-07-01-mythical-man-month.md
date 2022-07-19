@@ -5,7 +5,7 @@ subtitle: Still as relevant today as it was 40 years ago.
 thumbnail-img: "/assets/img/mythical-man-month.jpg"
 readtime: true
 show_excerpt: true
-permalink: /book-review/mythical-man-month
+permalink: /books/mythical-man-month
 tags: ["book-review", "tech-book"]
 date: 2022-07-01 12:00:00 -0500
 ---
@@ -37,7 +37,9 @@ These people and process problems that sit at the heart of software delivery pro
 And thus, in the best case we have purely technical problems, pure functions we can deterministically answer with data: what latency or downtime is acceptable, what throughput do we need, how much do we want to spend, do we have the skills on hand? But Brooks is arguing here that problems are rarely pure technical problems. Just sit in any daily stand up or contentious architecture meeting where the merits of two competing technologies are being discussed. Any problem that can be reduced to a technical problem is tractable. And in this book, Brooks lays out a formalism to how to approach those people and process problems that let teams deliver on the technology, a formalism that is as relevant now as it was 40 years ago, and I suspect, 40 years (or 400, if we are still around then) in the future as well.
 
 ---
-[^fn1]: <sub>I'll give her all the credit for trying though. I don't think she sees the humor in here widely inappropriate (in several ways) emojis, which, of course, make them all the more funny.</sub>
-[^fn2]: <sub>There are some legitimately hard technology problems beyond naming things and cache invalidation, problems that you could create a market for if you were to solve them. For example, my company would pay oodles for the ability to parse PDFs to a machine-readable markup file.</sub>
-[^fn3]: <sub>Exploratory Experimental Studies Comparing Online and Offline Programming Performance: <a href="https://dl.acm.org/doi/10.1145/362851.36285">https://dl.acm.org/doi/10.1145/362851.36285</a></sub>
-[^fn4]: <sub>I've heard this recently as confusing output with outcomes. Just because we are moving doesn't mean we are going where we need to go</sub>
+
+## Footnotes
+[^fn1]: I'll give her all the credit for trying though. I don't think she sees the humor in here widely inappropriate (in several ways) emojis, which, of course, make them all the more funny.
+[^fn2]: There are some legitimately hard technology problems beyond naming things and cache invalidation, problems that you could create a market for if you were to solve them. Large scale logistics, NP-Hard or NP-Complete, dealing with encoding, etc. For example, my company would pay oodles for the ability to parse PDFs to a machine-readable markup file.
+[^fn3]: Exploratory Experimental Studies Comparing Online and Offline Programming Performance: <a href="https://dl.acm.org/doi/10.1145/362851.36285">https://dl.acm.org/doi/10.1145/362851.36285</a>
+[^fn4]: I've heard this recently as confusing output with outcomes, i.e., just because we are moving doesn't mean we are going where we need to go
