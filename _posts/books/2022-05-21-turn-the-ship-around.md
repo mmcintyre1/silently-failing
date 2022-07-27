@@ -6,7 +6,7 @@ cover-img:
 thumbnail-img: /assets/img/turn-the-ship-around.jpg
 share-img: /assets/img/turn-the-ship-around.jpg
 readtime: true
-permalink: /book-review/turn-the-ship-around
+permalink: /books/turn-the-ship-around
 tags: ["book-review", "business-book"]
 date: 2022-05-21 12:00:00 -0500
 ---
@@ -38,6 +38,7 @@ All in all, the book was a nice mesh of Edward Demings, OKRs, Simon Sinek, and _
 
 ---
 
-[^fn1]: <sub>I'm no Keynesian, but I'd imagine the market for books, however emaciated it's been rendered over the last 25 years by an increasingly reluctant readership, is still outpacing the postcard market, hell, even the pamphlet market. Research pending.</sub>
-[^fn2]: <sub>That said, I'm sure there are some real sickos that put things like Carnegie's _How to Win Friends and Influence People_ on best literature lists, because of it's _impact_ or something.</sub>
-[^fn3]:<sub>The best verisimilitude any of these books can aspire to is "plausible". I don't know if it's the fact that I grew up without and then with the internet, but I default to the notion that nothing really happens, or at least not like the way people say it does; reality is diffracted and refracted through so many competing biases and human limitations and interests as to be basically impossible to objectively retell. Add in the clear economic interest any business book writer has for their particular ideology and there's no chance any example bandied about to justify said ideology's efficacy by said business book writer actually happened like they said it happened. But this isn't the scientific method, and most of these business books make rhetorical arguments rather than scientific ones, so I suppose it's enough for us to think that the events outlined _could_ happen.</sub>
+## Footnotes
+[^fn1]: I'm no Keynesian, but I'd imagine the market for books, however emaciated it's been rendered over the last 25 years by an increasingly reluctant readership, is still outpacing the postcard market, hell, even the pamphlet market. Research pending.
+[^fn2]: That said, I'm sure there are some real sickos that put things like Carnegie's _How to Win Friends and Influence People_ on best literature lists, because of it's _impact_ or something.
+[^fn3]:The best verisimilitude any of these books can aspire to is "plausible". I don't know if it's the fact that I grew up without and then with the internet, but I default to the notion that nothing really happens, or at least not like the way people say it does; reality is diffracted and refracted through so many competing biases and human limitations and interests as to be basically impossible to objectively retell. Add in the clear economic interest any business book writer has for their particular ideology and there's no chance any example bandied about to justify said ideology's efficacy by said business book writer actually happened like they said it happened. But this isn't the scientific method, and most of these business books make rhetorical arguments rather than scientific ones, so I suppose it's enough for us to think that the events outlined _could_ happen.
