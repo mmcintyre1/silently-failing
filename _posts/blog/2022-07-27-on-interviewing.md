@@ -11,36 +11,48 @@ permalink: /blog/on-interviewing
 tags: ["blog", "interviewing", "tech"]
 date: 2022-07-27 12:00:00 -0500
 ---
+## Table of Contents <!-- omit in toc -->
+- [Introduction](#introduction)
+- [A disclaimer](#a-disclaimer)
+- [What are we even looking for?](#what-are-we-even-looking-for)
+- [Bundles of noise and bias](#bundles-of-noise-and-bias)
+- [Interview approaches: the research](#interview-approaches-the-research)
+- [How can we even determine interview success?](#how-can-we-even-determine-interview-success)
+- [My approach](#my-approach)
+- [Skill-based technical assessments](#skill-based-technical-assessments)
+- [Come work with us](#come-work-with-us)
+- [How to give good feedback on candidates](#how-to-give-good-feedback-on-candidates)
+- [Wrapping it up](#wrapping-it-up)
+- [Footnotes](#footnotes)
+- [References](#references)
 
 ## Introduction
- "In technology", as Marissa Mayer, former CEO of Yahoo, says, "it’s about the people -- getting the best people, retaining them, nurturing a creative environment, and helping to find a way to innovate”. We've all been on teams with the wrong people; you know the sort. Those who you dread messaging when you see their name pop up as the last committer to the file with a bug, those who sap enthusiasm, who seem to hate their jobs out loud. Or, you've managed a team that just doesn't seem to perform, that spends hours tripping over minor hurtles when resolving a production incident to restore a database, or recoils at any mention of accountability or pride of ownership in the work they do.
+"In technology", as Marissa Mayer, former CEO of Yahoo, says, "it’s about the people -- getting the best people, retaining them, nurturing a creative environment, and helping to find a way to innovate”. We've all been on teams with the wrong people; you know the sort. Those who you dread messaging when you see their name pop up as the last committer to the file with a bug, those who sap enthusiasm, who seem to hate their jobs out loud. Or, you've managed a team that just doesn't seem to perform, that spends hours tripping over minor hurtles when resolving a production incident to restore a database, or recoils at any mention of accountability or pride of ownership in the work they do.
 
- Getting the right people is important. It will make or break a team, a department, eventually a company, like a tree rotting from the inside. We spend plenty of time _in interviews_, but a fraction of that is spent in _thinking about_ how we interview, thinking about the questions we ask and how we ask them, the predictive power of our criteria, the implicit biases of our judgments. I typically spend more time in any given week in status meetings than I do in planning or training for _being_ an interviewer. Like most interviewers, I used to rely on a canned list of questions to vaguely refer during an interview that I preferred to turn into a conversation, then I'd render a judgement like "no red flags, seems nice" in a reply all to the hiring manager like an overbooked small claims court judge.
+Getting the right people is important. It will make or break a team, a department, eventually a company, like a tree rotting from the inside. We spend plenty of time _in interviews_, but a fraction of that is spent in _thinking about_ how we interview, thinking about the questions we ask and how we ask them, the predictive power of our criteria, the implicit biases of our judgments. I typically spend more time in any given week in status meetings than I do in planning or training for _being_ an interviewer. Like most interviewers, I used to rely on a canned list of questions to vaguely refer to during an interview. I preferred a good conversation. Then I'd render a judgement like "no red flags, seems nice" in a reply all to the hiring manager and the interview panel, and wash my hands of the whole affair.
 
- In this post, I'll talk through some things I've learned about interviewing. Like anything that is worth doing right and doing well, I am in a perpetual cycle of researching, experimenting, reflecting, and adapting. I will almost certainly modify and update my approach as things move forward.
+But this just doesn't work. You'll miss valuable candidates, hire the wrong ones, undersell your company, or generally burn folks out on interviewing. Interviewing is not just a conversation, it's a diagnostic device used to make a predictive judgement about a candidate's qualifications and competencies and then to compare that to what you want and need in a candidate to make a decision of whether to extend an offer. The act of interviewing benefits from a serious interrogation into the component parts that might make it successfully predictive.
 
-## A Disclaimer
-My perspective is one of a system architect. I am not the hiring manager making these decisions, but as a technology leader I am a voice in most hiring decisions across my domain.
+In this post, I'll talk through some things I've learned about interviewing. Like anything that is worth doing right and doing well, I am in a perpetual cycle of researching, experimenting, reflecting, and adapting. I will almost certainly modify and update my approach as things move forward. This post isn't meant to be dictatorial; everyone's situation is different and different tactics should apply.
 
-At the time of writing, I am a system architect. I don't have any direct reports, and the ultimate decision to hire or not isn't in my control -- I only make recommendations. I view an architect's role as one mostly of indirect influence, of persuasion, but if I were to be the ultimate decider, I'd use the same criteria below but would need to factor in multiple other opinions, some of which would be less structured or behaviorally-driven. As a manager, I'd give guidance to those interviewing to steer their interviews towards more of a structured behavioral style.
+## A disclaimer
+I currently work as a system architect, meaning I am not currently a hiring manager on these decisions. My role is one of indirect influence, of persuasion. The insights below have been garnered as a result of hundreds of interviews that I've taken part in.
 
 ## What are we even looking for?
-What's the point of an interview? Why do we take the time to sit down and ask all sorts of questions of prospective employees? I'd argue there are three high-level purposes to hiring.
+What's the point of an interview? Why do we take the time to sit down and ask all sorts of questions of prospective employees? We can decompose the intent of an interview into three parts:
 
 1. **Behavioral Assessment** - Will this employee mesh with others, contribute to your company's culture, innovate, communicate effectively, etc?
-2. **Skill-Based Assessment** - Does this employee have the skills they say they do, and are their skills suitable to the role with a reasonable amount of training and investment?
+2. **Skill-Based Assessment**[^fn1] - Does this employee have the skills they say they do, and are their skills suitable to the role with a reasonable amount of training and investment?
 3. **Selling Your Company** - Does this employee even want to work at your company, and what can you do to make your company attractive to them?
 
-I've called the second item a more generic "Skill-Based" rather than saying "technical". Every role has some measure of skill involved. It just so happens in my domain, we do technical assessments, but in others, you might ask a future ice scream scooper how they are with cold fingers, or a tax accountant to show their certifications. Tech is a weird beast because we largely ignore certifications while simultaneously bemoaning the difficulty we have in assessing technical viability.
-
-For the purposes of this post, I separate a behavioral assessment from a skill-based one. I'll dedicate some real estate at the end of the article [reference] to what I've done at my company for skill-based assessments, but the bulk of this article is about behavioral assessments. I'd advocate that if your interviews are a mish-mash of interrogative technical trivia and behavioral questions and conversational banter, you should clearly delineate any given interviews intent and ensure that you have communicated that with your interview panel.
+I've found it has been helpful to have separate interviews for skill-based and behavioral assessments. You can still indirectly diagnose behavioral trends from measuring skills, but approaches are different and at best you can only indirectly observe behavior while assessing skills or vice versa. It takes a really skilled interviewer to do both in a way that doesn't systemically bias the assessment. I dedicate some real estate at the end of the article to [skill-based assessments](#skill-based) and [selling your company](#selling), but the bulk of this article is about a behavioral assessment.
 
 ## Bundles of noise and bias
-But why is choosing the right candidate so damn hard? It's difficult in part because most of the hard-wiring within our brain is built for snap judgments, the type of instinctual jumping to conclusions that allowed our ancestors to distinguish a saber tooth tiger from some menacingly-toothed shrubbery, or a rival wielding the business end of a spear from a friend and a basket of blueberries to share (cavemen loved blueberries, I'm sure).
+Why is choosing the right candidate so damn hard? It's difficult in part because most of the hard-wiring within our brain is built for snap judgments, the type of instinctual jumping to conclusions that allowed our ancestors to instantly react to anything vaguely resembling a threat, whether it be rival tribes competing for resources, predators looking for a meal, or precarious environmental hazards.
 
-Daniel Kahneman, in _Thinking, Fast and Slow_, calls this mental system of involuntary mental shortcuts System 1 judgments. They were a biological advantage when the cost of being wrong was clearly outweighed by the mammoth biological cost of not seeing tiger for the trees and being summarily eaten. I'm no biologist, but I imagine it's tough to procreate if you get eaten because you took the time to intellectualize every potential threat. Unless we force ourselves into thinking about how we make judgments, we defer to heuristics that lead to bias.
+Daniel Kahneman, in _Thinking, Fast and Slow_, calls this mental system of involuntary shortcuts and heuristics _System 1_ judgments. They were a biological advantage when the cost of misjudging a menacingly toothed piece of shrubbery for a predator was clearly outweighed by the mammoth biological cost of not seeing tiger for the trees and being summarily eaten. I'm no biologist, but it's hard to procreate if you are being eaten. The moral here is that unless we force ourselves into what Kahneman calls _System 2_ thinking, a comparatively slower, more effortful and logical approach, we will default to the easy mental shortcuts that lead to bias.
 
-Here are some biases you might typically fall into during an interview:
+[Read up to here] Here are some biases you might typically fall into during an interview:
 - **First Impressions Error** - making decisions too quickly
 - **Halo Effect** - letting one positive trait affect overall impression
 - **Horn Effect** - letting one negative trait affect overall impression
@@ -84,13 +96,23 @@ Once I have these high-level competencies, I start to craft questions. Asking be
 - prompt ahead of time
 - live whiteboarding - testing not just technical viability but how someone operates under pressure
 - technical trivia questions
--
+
+## Come work with us
+
+## How to give good feedback on candidates
+
 ## Wrapping it up
-Didn't address things like interview panels, how to structure and give feedback, etc. etc. And this is advice that is applicable to my circumstance, so you might find something that works differently for your domain. If I have one piece of advice, it would be to really think through your interview process and interrogate whether it is working for you, whether you are hiring the best candidates, missing out on others, biased in invisible ways. Because the unexamined interview process is not worth having.
+Didn't address things like interview panels, how to structure and give feedback, etc. etc.
+
+And this is advice that is applicable to my circumstance, so you might find something that works differently for your domain. If I have one piece of advice, it would be to really think through your interview process and interrogate whether it is working for you, whether you are hiring the best candidates, missing out on others, biased in invisible ways. Because the unexamined interview process is not worth having.
 
 
 ---
-### References
+
+## Footnotes
+[^fn1]: I've called the second item a more generic "Skill-Based" rather than saying "technical". Every role has some measure of skill involved. It just so happens in my domain, we do technical assessments, but in others, you might ask a future ice scream scooper how they are with cold fingers, or a tax accountant to show their certifications. Tech is a weird beast because we largely ignore certifications while simultaneously bemoaning the difficulty we have in assessing technical viability.
+
+## References
 Alonso, Pamela & Moscoso, Silvia. (2017). Structured behavioral and conventional interviews: Differences and biases in interviewer ratings. Journal of Work and   Organizational Psychology. 33. 183-191. 10.1016/j.rpto.2017.07.003.
 
 Kahneman, D. (2011). Thinking, fast and slow. Farrar, Straus and Giroux.
