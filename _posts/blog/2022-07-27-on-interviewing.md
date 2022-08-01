@@ -86,6 +86,7 @@ Generally,
 
 ## Giving Feedback
 
+
 ## My approach
 I'll start with some high level competencies, a framework within which to ground my questions. Often this will be supplied by the hiring manager, but when it's not, I find that these sorts of things can be a clarifying exercise. I like to also add a few clarifying thoughts to each competency.
 
