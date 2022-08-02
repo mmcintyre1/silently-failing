@@ -22,7 +22,7 @@ date: 2022-07-27 12:00:00 -0500
 - [Assessing Skills](#assessing-skills)
   - [Technical Assessments](#technical-assessments)
 - [Selling Your Company](#selling-your-company)
-- [Giving Feedback](#giving-feedback)
+  - [The Grass Is Greener](#the-grass-is-greener)
 - [My approach](#my-approach)
 - [Wrapping it Up](#wrapping-it-up)
 - [References](#references)
@@ -80,33 +80,52 @@ In increasing the structure of the interview corresponds to increasing reliabili
 
 ## Assessing Skills
 ### Technical Assessments
-Generally,
+Generally, I think technical assessments are easier and less predictive for a potential candidate's success in a role than a behavioral interview, but if you approach things wrong, you will make for a disastrous result. Below, I've put four approaches I've seen to assessing technical skills. You can mix and match items; for example, you might have a hybrid of #1 and #2, like a prompt ahead of time that "we will be building an API" but then you'll have to work through the specific problem in real-time.
+
+| task                                         | description                                                                                                                                                    | pre-work                                                                                                     |
+|----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| Take home assignment                         | Give a candidate a coding task that they complete on their own time                                                                                            | Create a simple prompt that is complete-able in a specific amount of time and is supplied to every candidate |
+| Live whiteboarding                           | Write code during an interview                                                                                                                                 | Create simple prompts; if remote, ensure candidate is ready to share screen and has a text editor            |
+| Implementation of general domain solution    | Pose a problem that you might have experienced in your domain and ask for a solution using whatever tools at hand                                              | Enumerate possibilities so everyone interviewing is pulling from some list                                   |
+| General knowledge questions about technology | Ask general questions about whatever the technology required for the job is, e.g., what is a sealed class in C#, how does Java handle garbage collection, etc. | Create a list of questions to ask about relevant tech                                                        |
+
+#4 on this list should generally be avoided. There are too many reasons for a candidate not to know certain questions when posed in an interview other than that they do not have skills. There are also plenty of paid services to administer these sorts of assessments ahead of time and you could use them as screening devices. I have found, however, that a chance to review code or technical implementations with candidates has provided extremely valuable feedback to how they compose thoughts, how they work a problem. A technical assessment can be a valuable signal to behavioral competencies. A candidate might be a technical wunderkind but is an absolute jerk when explaining solutions, and that would be drawn in sharp relief while reviewing technical solutions.
+
+Now that we've walked through behavioral and skills assessments, there's a third thread to a successful interview that is often overlooked: convincing candidates that they should come work for your company.
 
 ## Selling Your Company
+### The Grass Is Greener
+Most of us don't work at prestigious FAANG companies, with prestige that sells itself. The interview is the part of the process you can control to convince someone that your company is a place worth working at. How can you impart that your company is a place someone would want to come to, especially in a hyper-competitive labor market? I typically spend a few minutes at the end of an interview making a pitch, trying to answer the question of what it'd be like to work at my company. At a high-level, what does the company do, and why is that important? What problems would you run into, what opportunities are there? I am aiming for an honest assessment.
 
-## Giving Feedback
+Beyond just a pitch, who you choose to be on your interview panel is really important as well. They are your salespeople for the company. I think back to why I chose specific jobs over others, and all else being equal, if I really liked someone I was interviewing with (especially if it was the hiring manager), that was enough to compel me. Remember that candidates are equally subject to the same biases that we are as interviewers: their first impressions will be strong. If you run a poor interview, one where interviewers aren't prepared, or are stepping all over each other, a candidate is likely to extrapolate that to the work environment in general. If you can't run an interview, they are thinking, you must not be able to run much else.
 
+Ultimately, there are so many additional factors influencing a candidate's decision to choose a particular job over others that you do not control, but you do control how you sell your company during an interview, and you should seek to maximize that, especially because the effort to do so is light.
 
 ## My approach
-I'll start with some high level competencies, a framework within which to ground my questions. Often this will be supplied by the hiring manager, but when it's not, I find that these sorts of things can be a clarifying exercise. I like to also add a few clarifying thoughts to each competency.
+Now that we've gone through what we are assessing for, I'd like to share an approach I've been using recently for how I structure my preparation for an interview. I'll start with some high level competencies, a framework within which to ground my questions. Often this will be supplied by the hiring manager, but when it's not, I find that these sorts of things can be a clarifying exercise. I like to also add a few clarifying thoughts to each competency.
 
-Once I have these high-level competencies, I start to craft questions. Asking behavioral questions becomes somewhat formulaic; they tend to follow the format of
+Once I have these high-level competencies, I start to craft questions. Asking behavioral questions becomes somewhat formulaic; they tend to follow the format of:
 - tell me about a time when ...
 - have you ever ...
 - give me an example of ...
 - describe a task ...
 
-1. Alignment with Role _someone who is comfortable with data pipelines, terminal commands, deployment of infrastructure as code_
-  - Have you ever had to work with data
-2. Drive _someone who is self-directed, engages in learning, and loves engineering_
-  - Tell me about a time where you had to learn a new technology. If possible, one that wasn't required for school. What was it? How did you go about learning it?
-  - Why do you want to be a software engineer?
-3. Cultural Fit - _someone who is excited by complex environments, isn't intimidated by jumping into difficult spaces with unclear documentation, and is an open communicator_
-  - Can you describe the most complicated technical environment you've worked in? What made it complicated? How do you deal with these sorts of environments?
+This generalizes into something like the following. I won't get to all my questions, but consistency is key here, so I make sure I ask all candidates the same questions in relatively the same order.
 
+1. **Open Communication** _effective at explaining problems, resolving disagreements_
+  - Without reference to technology, can you explain the business problem your last project was solving?
+  - Can you tell me about the last time you were working on a project and there were problems caused by poor communication? What happened, and how might you avoid those same problems in the future?
+2. **Drive** _self-directed, engages in learning, and loves engineering_
+  - Tell me about a time where you had to learn a new technology. If possible, one that wasn't required for school. What was it? How did you go about learning it?
+  - Give me an example of when you improved the code base or application you were working on where you identified the opportunity for improvement and then executed on that improvement?
+3. **Cultural Fit** - _excited by complex environments, isn't intimidated by jumping into difficult spaces with unclear documentation, and is an open communicator_
+  - Can you describe the most complicated technical environment you've worked in? What made it complicated? How do you deal with these sorts of environments?
+  - What are some concerns you'd have with maintaining and improving many legacy code applications?
+4. **Technical Skill** _comfortable with data pipelines, terminal commands, deployment of infrastructure as code_
+  - Use the technical assessment
 
 ## Wrapping it Up
-If I have one piece of advice, it would be to really think through your interview process and interrogate whether it is working for you, whether you are hiring the best candidates, missing out on others, biased in invisible ways. Because the unexamined interview process is not worth having.
+There are still dozens of other considerations, such as how to structure feedback[^fn2], who to have on your interview panel, but if I have one piece of advice, it would be to really think through your interview process and interrogate whether it is working for you, whether you are hiring the best candidates, missing out on others, biased in invisible ways. Because the unexamined interview process is not worth having.
 
 ---
 ## References
@@ -118,3 +137,4 @@ If I have one piece of advice, it would be to really think through your intervie
 
 ## Footnotes
 [^fn1]: I've called the second item a more generic "Skill-Based" rather than saying "technical". Every role has some measure of skill involved. It just so happens in my domain, we do technical assessments, but in others, you might ask a future ice scream scooper how they are with cold fingers, or a tax accountant to show their certifications. Tech is a weird beast because we largely ignore certifications while simultaneously bemoaning the difficulty we have in assessing technical viability.
+[^fn2]: At my current company, we use a Microsoft Forms template with four numerical assessments (1-5) on relevant competencies, a pros section, a con section, additional notes, and importantly last, the actual hire/no hire recommendation. Most important on feedback is to ensure it is not shared with a larger group, as feedback is highly subject to bandwagon effects.
