@@ -5,6 +5,7 @@ subtitle: Some thoughts on interviewing, biases, and hiring the right candidates
 cover-img:
 thumbnail-img:
 share-img:
+excerpt: "This is a test"
 readtime: true
 permalink: /blog/on-interviewing
 tags: ["blog", "interviewing", "business", "tech"]
@@ -17,7 +18,7 @@ date: 2022-07-27 12:00:00 -0500
 - [What's The Point?](#whats-the-point)
 - [Assessing Behavior And Competencies](#assessing-behavior-and-competencies)
   - [The Noise And The Bias](#the-noise-and-the-bias)
-  - [The Research](#the-research)
+  - [Types Of Interviews](#types-of-interviews)
 - [Assessing Skills](#assessing-skills)
   - [Technical Assessments](#technical-assessments)
   - [Other Skills Assessments](#other-skills-assessments)
@@ -70,7 +71,7 @@ Here are some biases you might typically fall into during an interview:
 
 Bias, a systematic skew in one direction or another, is just one side of the errors in judgement coin[^fn2]. The other side is noise, or random scatter. Add this to the interview mix, and you have a recipe for the decisions we make in the candidates we hire having exceptionally low predictive power; essentially only slightly better than a coin flip. We could all save a bit of time and just flip the coin. Let's take a look at what the research says about how to increase the predictive power of our judgments.
 
-### The Research
+### Types Of Interviews
 Despite the potential presence of bias and noise, not all interview types are created the same. Most research classifies interview approaches into three broad categories, coinciding with a spectrum of less to more structure structure and informal to behavioral questions.
 
 The most informal type of interview and the structure most frequently used is a **convential unstructured interview**, where the interviewer and interviewee engage in a type of informal dialogue, where questions follow the course of conversation and the interviewer typically doesn't bring a script of questions to ask.
@@ -83,24 +84,29 @@ In increasing the structure of the interview corresponds to increasing reliabili
 
 ## Assessing Skills
 ### Technical Assessments
-Technical assessments tend to be more straight forward than behavioral assessments, but if you don't have a structure and approach in place, you will inevitably end up with folks who pepper candidates with general knowledge questions about particular elements of the software stack they are applying for. What's a sealed class, what's the difference between mock and stub, how does the JVM distinguish between heap and stack memory? You get the idea. And while this style of questioning might eliminate those who aren't fit for purpose for a particular role, it has two prominent negatives in that it'll also eliminate people who do not do well with rapid fire trivia, and it'll make for a terribly memorable interview experience. I think back to my worst interviews, and they all involved this sort of technical assessment.
+Technical assessments tend to be more straight forward than behavioral assessments, but if you don't have a structure and approach in place, you will inevitably end up with folks who pepper candidates with general knowledge questions about particular elements of the software stack they are applying for. What's a sealed class, what's the difference between mock and stub, how does the JVM use heap and stack memory, you get the idea. And while this style of questioning might eliminate those who aren't fit for purpose for a particular role, it has two prominent negatives in that it'll also eliminate people who do not do well with rapid-fire trivia, and it'll make for a generally poor interview experience. I think back to my worst interviews, and they all involved this sort of technical assessment.
 
-It is far more powerful to use real-life examples in the technical assessment to gauge a candidates ability to scope a problem, to come up with a solution, and to communicate that solution. There are a handful of approaches to _how_ you assess technical skill, but we can sketch some broad stroke approaches here.
+It is far more powerful to use real-life examples of actual problems and actual code in the technical assessment to gauge a candidates ability to scope a problem, to come up with a solution, and to communicate that solution. There are a handful of approaches to _how_ you assess technical skill, but we can sketch some broad stroke approaches here.
 
-| task                         | description                                                                                                                                            | pros                                                                                                                                                                                                                                                | cons                                                                                                           |
-|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| live coding                  | candidates need to write some code to solve a problem                                                                                                  | gives a really good indication of whether a person can write code, how they explain the code they write, and the way they solve problems good for showcasing algorithmic thinking                                                                   | doesn't showcase system design thinking, including class structures, integration points, access patterns, etc. |
-| prompt-based implementations | candidates are given a prompt of a small system to implement (e.g., an API for a vending machine) and are asked to sketch it, including class diagrams | great for system design thinking and critical thinking around a problem domain                                                                                                                                                                      | might not indicate someone's skill at writing code                                                             |
-| code review                  | candidates review code, either from your current code bases or toy examples or code they wrote ahead of time                                           | mimics a real process that happens frequently and gives the candidate an opportunity to speak about optimizing code if using real code from internal code bases, gives a candidate the ability to see your code and what they might be working with | limited in scope reading code doesn't mean you write code well                                                 |
-| general knowledge questions  | questions about technical stack either listed on resume or what is expected to be worked with                                                          | easy to prepare                                                                                                                                                                                                                                     | too much noise and bias                                                                                        |
+| task                         | description                                                                                                                                            | pros                                                                                         | cons                                                                                                           |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| live coding                  | candidates need to write some code to solve a problem                                                                                                  | - showcases algorithmic thinking - good signal for ability to write code                     | doesn't showcase system design thinking, including class structures, integration points, access patterns, etc. |
+| prompt-based implementations | candidates are given a prompt of a small system to implement (e.g., an API for a vending machine) and are asked to sketch it, including class diagrams | great for system design thinking and critical thinking around a problem domain               | might not indicate someone's skill at writing code                                                             |
+| code review                  | candidates review code, either from your current code bases or toy examples or code they wrote ahead of time                                           | - mimics a real situation - tends to be most enjoyable process for candidate and interviewer | - limited in scope - reading code doesn't mean you write code well                                             |
+| general knowledge questions  | questions about technical stack either listed on resume or what is expected to be worked with                                                          | easy to prepare                                                                              | too much noise and bias                                                                                        |
 
 You might mix and match 1, 2, or 3, or run some A/B testing on approaches. #4 should be avoided generally, and I list it here solely to give that warning. An approach I've used in the past is to have a repository of options for code examples and prompts, and then for any particular opening we have all candidates go through the exact same process. This consistency is exceptionally important to reducing bias.
 
-Other concerns might be whether you circulate that prompt ahead of time, either as a suggestion (you'll be asked to implement an API during the interview) or specifically as a take-home assignment. I prefer the former, as a take-home assignment means someone can borrow an implementation and memorize it ahead of time. Live work, on the other hand, might exclude people who do not work well under pressure, but I'd rather miss out on one of those candidates rather than hire someone who just memorized one implementation. And with good interview coaching, you should be able to help out a candidate who doesn't work well under the pressure of a live session.
+I have found good success with toy examples of actual implementations rather than algorithmic puzzles. I'd rather a candidate implement a csv parser than code me up a red-black tree, but others might feel that the latter is a more reliable indicator of general cognitive ability. What sorts of problems you ask is completely up to you, but think about what exactly you want to be assessing and tailor the prompts to that.
+
+Other concerns might be whether you circulate that prompt ahead of time, either as a suggestion (e.g., you'll be asked to implement an API during the interview) or specifically as a take-home assignment. I prefer the former, as a take-home assignment means someone can borrow an implementation and memorize it ahead of time. Live work, on the other hand, might exclude people who do not work well under pressure, but I'd rather miss out on one of those candidates rather than hire someone who just memorized one implementation. And with good interview coaching, you should be able to help out a candidate who doesn't work well under the pressure of a live session.
 
 ### Other Skills Assessments
-You might not necessarily being hiring for a technical role, in which case, a live coding exercise wouldn't be an accurate barometer of success in a role.
+You might not necessarily being hiring for a technical role, in which case, a live coding exercise won't tell you much about a candidate. Some of the most memorable assessments I've gone through have been hypotheticals assessing critical thinking and problem solving, which is a valuable skill in any role.
 
+- [Fermi problems](https://en.wikipedia.org/wiki/Fermi_problem)
+
+- [Hypotheticals]
 
 ## Selling Your Company
 ### The Grass Is Greener
@@ -111,6 +117,7 @@ Beyond just a pitch, who you choose to be on your interview panel is really impo
 Ultimately, there are so many additional factors influencing a candidate's decision to choose a particular job over others that you do not control, but you do control how you sell your company during an interview, and you should seek to maximize that, especially because the effort to do so is light.
 
 ### Training Interviewers
+
 
 ## My approach
 Now that we've gone through what we are assessing for, I'd like to share an approach I've been using recently for how I structure my preparation for an interview. I'll start with some high level competencies, a framework within which to ground my questions. Often this will be supplied by the hiring manager, but when it's not, I find that these sorts of things can be a clarifying exercise. I like to also add a few clarifying thoughts to each competency.
