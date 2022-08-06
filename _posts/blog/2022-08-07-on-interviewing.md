@@ -1,15 +1,13 @@
 ---
 layout: post
 title: "On Interviewing"
-subtitle: Some thoughts on interviewing, biases, and hiring the right candidates
-cover-img:
+subtitle: A look into interviewing, biases, and hiring the best candidates
 thumbnail-img:
 share-img:
-excerpt: "This is a test"
 readtime: true
 permalink: /blog/on-interviewing
 tags: ["blog", "interviewing", "business", "tech"]
-date: 2022-07-27 12:00:00 -0500
+date: 2022-08-07 12:00:00 -0500
 ---
 ## Table of Contents <!-- omit in toc -->
 - [Introduction](#introduction)
@@ -102,11 +100,22 @@ I have found good success with toy examples of actual implementations rather tha
 Other concerns might be whether you circulate that prompt ahead of time, either as a suggestion (e.g., you'll be asked to implement an API during the interview) or specifically as a take-home assignment. I prefer the former, as a take-home assignment means someone can borrow an implementation and memorize it ahead of time. Live work, on the other hand, might exclude people who do not work well under pressure, but I'd rather miss out on one of those candidates rather than hire someone who just memorized one implementation. And with good interview coaching, you should be able to help out a candidate who doesn't work well under the pressure of a live session.
 
 ### Other Skills Assessments
-You might not necessarily being hiring for a technical role, in which case, a live coding exercise won't tell you much about a candidate. Some of the most memorable assessments I've gone through have been hypotheticals assessing critical thinking and problem solving, which is a valuable skill in any role.
+Even if you aren't hiring for a technical role, you still might to assess skills. Outside of role-specific competencies, one of the most reliable sets of skills for any job is critical thinking and problem solving. Below are a few different methods that might be useful jumping off points.
 
-- [Fermi problems](https://en.wikipedia.org/wiki/Fermi_problem)
+#### Fermi problems <!-- omit in toc -->
+These are problems of extreme, back-of-the-envelope estimations. While [Fermi problems](https://en.wikipedia.org/wiki/Fermi_problem) are typically used for large scientific estimations, they can also be useful for more generic questions. The steps you need to go through to break down what at first glance seems like an intractable problem are often reflections of how people generally decompose problems that are bigger than a single bite. Some examples:
+  - How many dogs are there in New York?
+  - How far can an average person walk in one day?
+  - Assuming someone lives to 80 years old, how many times will they get their hair cut?
 
-- [Hypotheticals]
+Some candidates might balk at these seemingly out-of-left-field questions, so be prepared to help out with some key facts or help. Also, a thing to note is that there are some cultural differences in approaches to interviews, as some candidates might be taught that interviews are solely for talking about past achievements and future competencies, and deviating from script might require some coaching for the candidate to "play along", as it were.
+
+#### Hypotheticals <!-- omit in toc -->
+Somewhat similar to Fermi problems, but more open-ended are hypothetical situations that aren't necessarily related to the current job. For example,
+- Imagine I was an angel investor and I've come to you with $10 million dollars[^fn3] to create a business, but it needs to be profitable in 3 years. What is the business, and how might you make it profitable?
+- What's a hobby you have, and can you teach me about it?
+
+Similar caveats to Fermi problems apply, but anecdotally, these questions tend to be the most interesting and memorable both for candidates and interviewers.
 
 ## Selling Your Company
 ### The Grass Is Greener
@@ -117,7 +126,16 @@ Beyond just a pitch, who you choose to be on your interview panel is really impo
 Ultimately, there are so many additional factors influencing a candidate's decision to choose a particular job over others that you do not control, but you do control how you sell your company during an interview, and you should seek to maximize that, especially because the effort to do so is light.
 
 ### Training Interviewers
-
+One facet of interviewing that is often overlooked is that interviewing is a completely different skill than anyone's day job. Just because you are a good engineer or product manager doesn't make you a good interviewer. It is a separate skill, and you need to train people who are interviewing to be good at interviewing. Otherwise, you will end up with a haphazard interview where the interviewer spends most of the time talking, or people are talking over people, or it's generally disorganized. Here is some simple advice for what I try and do during an interview that might be helpful.
+1. **Communicate with your interview group ahead of time** -- you need to align on
+  - who will play "MC", in charge of introductions or moving the conversation along
+  - how you will ask questions does everyone ask one question, or do you have each person with a block of time
+2. **Make sure you have your questions written down and ready to be asked** -- ad-libbing at best means you are defaulting to a conversational style, at worst it makes you look unprepared and disorganized
+3. **Keep your questions clear and concise** -- long or meandering questions are difficult to follow and lead to confusion
+4. **Don't talk too much** -- keep anecdotes and asides brief or eliminate them; an interview shouldn't be a showcase for how smart you are, and silence shouldn't need to be immediately filled
+5. **Help candidates along if they are stuck** -- if someone is struggling with an answer, try to breadcrumb them back on track
+6. **Conversely, Don't dwell too long on a question the candidate is too far off trail on** -- don't be afraid to move the interview along
+7. **Most importantly, be kind and empathetic** -- interviews are difficult for everyone involved, so try and have patience and humility and follow the golden rule to not be a jerk
 
 ## My approach
 Now that we've gone through what we are assessing for, I'd like to share an approach I've been using recently for how I structure my preparation for an interview. I'll start with some high level competencies, a framework within which to ground my questions. Often this will be supplied by the hiring manager, but when it's not, I find that these sorts of things can be a clarifying exercise. I like to also add a few clarifying thoughts to each competency.
@@ -143,7 +161,7 @@ This generalizes into something like the following. I won't get to all my questi
   - Use the technical assessment
 
 ## Wrapping it Up
-There are still dozens of other considerations, such as how to structure feedback[^fn3], who to have on your interview panel, but if I have one piece of advice, it would be to really think through your interview process and interrogate whether it is working for you, whether you are hiring the best candidates, missing out on others, biased in invisible ways. Because the unexamined interview process is not worth having.
+There are still dozens of other considerations, such as how to structure feedback[^fn4], who to have on your interview panel, but if I have one piece of advice, it would be to really think through your interview process and interrogate whether it is working for you, whether you are hiring the best candidates, missing out on others, biased in invisible ways. Because the unexamined interview process is not worth having.
 
 ---
 ## References
@@ -156,4 +174,5 @@ There are still dozens of other considerations, such as how to structure feedbac
 ## Footnotes
 [^fn1]: I've called the second item a more generic "Skill-Based" rather than saying "technical". Every role has some measure of skill involved. It just so happens in my domain, we do technical assessments, but in others, you might ask a future ice scream scooper how they are with cold fingers, or a tax accountant to show their certifications. Tech is a weird beast because we largely ignore certifications while simultaneously bemoaning the difficulty we have in assessing technical viability.
 [^fn2]: Bias and noise all build out an equation of mean error squared of estimations. Plenty of statistics resources on this and it's interesting in its own right beyond the context of interviews.
-[^fn3]: At my current company, we use a Microsoft Forms template with four numerical assessments (1-5) on relevant competencies, a pros section, a con section, additional notes, and importantly last, the actual hire/no hire recommendation. Most important on feedback is to ensure it is not shared with a larger group, as feedback is highly subject to bandwagon effects.
+[^fn3]: You might need to up this, pending inflation.
+[^fn4]: At my current company, we use a Microsoft Forms template with four numerical assessments (1-5) on relevant competencies, a pros section, a con section, additional notes, and importantly last, the actual hire/no hire recommendation. Most important on feedback is to ensure it is not shared with a larger group, as feedback is highly subject to bandwagon effects.
