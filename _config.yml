@@ -116,10 +116,10 @@ site-css:
 # --- Web Analytics Section --- #
 
 # Fill in your Google Analytics gtag.js ID to track your website using gtag
-gtag: G-03CRWXEDNW
+gtag: G-4S3H86FQ56
 
 # Fill in your Google Analytics ID to track your website using Google Analytics
-google_analytics: G-03CRWXEDNW
+google_analytics: UA-190741338-1
 
 # Fill in your Cloudflare Analytics beacon token to track your website using Cloudflare Analytics
 #cloudflare_analytics: ""
