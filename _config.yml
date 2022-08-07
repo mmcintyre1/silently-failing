@@ -77,7 +77,7 @@ feed_show_tags: true
 post_search: true
 
 # The keywords to associate with your website, for SEO purposes
-keywords: "book-reviews,tech"
+keywords: "book-reviews,tech,blog"
 
 # --- Colours / background image --- #
 
@@ -116,7 +116,7 @@ site-css:
 # --- Web Analytics Section --- #
 
 # Fill in your Google Analytics gtag.js ID to track your website using gtag
-#gtag: ""
+gtag: G-03CRWXEDNW
 
 # Fill in your Google Analytics ID to track your website using Google Analytics
 google_analytics: G-03CRWXEDNW
