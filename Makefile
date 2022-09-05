@@ -27,7 +27,7 @@ build:
 	$(RUN_JEKYLL) jekyll build
 
 server:
-	$(COMPOSE) up
+	$(COMPOSE) up -d
 
 update:
 	$(RUN_JEKYLL) bundle update
