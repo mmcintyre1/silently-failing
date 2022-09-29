@@ -17,6 +17,7 @@ navbar-links:
   Home: "/"
   Blog: "blog"
   Book Reviews: "books"
+  Lists: "lists"
   About Me: "aboutme"
 
   # Author's home: ""
