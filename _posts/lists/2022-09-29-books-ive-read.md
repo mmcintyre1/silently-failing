@@ -59,3 +59,10 @@ Provides a decent overview of architectural concerns. As far as a handbook on ar
 **Rating**: 6.5/10
 
 Rating this book feels inextricably linked to rating Data Mesh as a framework, which seeks to be the fourth wave of the data revolution, supplanting mutli-modal cloud architectures. While the idea is nice (who wouldn't want to work in a company where you could implement this?), it feels far too idealistic; this would be impossible to implement at the places I've been. There are some interesting ideas, and particularly the idea of a data product, and the book has a wonderful bibliography. Data Mesh is coming out of ThoughtWorks, so it'll have that cache and is worth knowing about even if you never have the good fortune to see even part of a data mesh come to fruition.
+
+<center><h1>Science Books</h1></center>
+---
+
+### A Thousand Brains
+**Rating**: 7.5/10
+As Richard Dawkins says in the foreword, this book "will turn your mind into a whirling maelstrom of excitingly provocative ideas". I don't know much about the brain and how intelligence works, but after having read this book (and Hawkin's first book, _On Intelligence_ in the past), I want to learn more. I'm still trying to wrap my head around the idea that thinking is movement, although, regardless of it's veracity, I love the idea that the brain has thousands of models for every object vying for election to "true" (our perception is just a model!). Worth the read, although Hawkins the neuroscientist is stronger than Hawkins the futurist, the philosopher, the prognosticator.
