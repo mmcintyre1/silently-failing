@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Books I've Read"
-subtitle: An ever-growing compendium of books I've read and some quick thoughts
+subtitle: An ever-growing compendium of books I've read
 thumbnail-img:
 share-img:
 readtime: true
 permalink: /lists/books-ive-read
-tags: ["lists"]
+tags: ["lists", "books"]
 date: 2022-09-04 12:00:00 -0500
 last-updated: 2022-11-05 12:00:00 -0500
 ---
