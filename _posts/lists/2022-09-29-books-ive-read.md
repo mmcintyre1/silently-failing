@@ -8,7 +8,7 @@ readtime: true
 permalink: /lists/books-ive-read
 tags: ["lists", "books"]
 date: 2022-09-04 12:00:00 -0500
-last-updated: 2022-11-05 12:00:00 -0500
+last-updated: 2022-11-13 12:00:00 -0500
 ---
 
 <style type="text/css">
@@ -192,6 +192,21 @@ This list isn't meant to be entirely comprehensive to all books I've read. Most 
    </div>
    <div class="column right">
     One of those books that made me see the world in a different way. Collaboration, in the form of <i>joint intentionality</i> and <i>shared intentionality</i> (which we can think of as individual and cultural collaboration, respectively), is not just a quirk of humans but rather what separates us from animals. The mechanisms of this collaboration are not just socially mediated, but evolutionary. Tomasello takes a multi-disciplinary approach, marrying philosophy, pedagogy, linguistics, sociology, and psychology to present a rigorously tested (and he certainly parades out the studies) view of what he calls a maturational theory of ontogeny (read: human development). If we borrow Dawkins conception of selfish genes, then our very genetics is built upon perpetuating these mechanisms of collaboration, which has far-reaching implications for things like in-group/out-group exclusion, individual success, persuasion, and even happiness.
+   </div>
+</div>
+---
+<center>
+   <h3>The Demon-Haunted World</h3>
+   <b>Rating: 7.5/10</b>
+</center>
+<div class="row">
+   <div class="column left">
+      <a href="/assets/img/books/demon-haunted-world=cover.jpg">
+      <img src="/assets/img/books/demon-haunted-world=cover.jpg" alt="">
+      </a>
+   </div>
+   <div class="column right">
+    Carl Sagan weaves a deft argument against anti-science ideals, starting with alien abductions but tracing a line back to witch hunts of the Middle Ages. The argument is compelling to those who already view the importance of the scientific method as paramount, although a book on viral fringe ideas feels somewhat incomplete without reckoning with the Internet, a place where any fringe idea has an identity-affirming community ready-made, to be slipped on like a jacket. Inertia and laziness are no longer a firebreak against the virality of any idea. But this book can hardly be faulted for its publication date, 1995. If nothing else, it makes you wish Sagan were still around to build ironclad arguments about the world we currently live in.
    </div>
 </div>
 ---
