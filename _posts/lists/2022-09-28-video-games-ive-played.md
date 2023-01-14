@@ -13,13 +13,6 @@ last-updated: 2023-01-14 12:00:00 -0500
 
 <style type="text/css">
 
-img {
-    float: left;
-    width:  200px;
-    height: 220px;
-    object-fit: cover;
-}
-
 .column {
   float: left;
   padding: 20px;
