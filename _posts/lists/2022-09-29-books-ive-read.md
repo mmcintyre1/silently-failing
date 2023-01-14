@@ -8,7 +8,7 @@ readtime: true
 permalink: /lists/books-ive-read
 tags: ["lists", "books"]
 date: 2022-09-04 12:00:00 -0500
-last-updated: 2022-11-13 12:00:00 -0500
+last-updated: 2023-01-13 12:00:00 -0500
 ---
 
 <style type="text/css">
@@ -138,7 +138,7 @@ This list isn't meant to be entirely comprehensive to all books I've read. Most 
       </a>
    </div>
    <div class="column right">
-
+    I've heard this book spoken of in rarefied air, as a bible of effective negotiation. And Voss, the author, certainly has the pedigree. And conceptually, the idea of tactical empathy rings true, even if it seems manipulative. I think that's this books strength, in that in encourages you to overcome the ickiness of seeming to "manipulate" people; every negotiation is an attempt to manipulate, and we need to recognize the fundamentally human aspects of the other side of the negotiation in order to uncover leverage points, to persuade, to convince. Life is a negotiation, Voss argues, and then goes on to outline a whole bunch of tools to gain the upper-hand, leaning on cognitive theory, negotiation frameworks, and his conception of tactical empathy to make the case. I used some of the ideas in this book to negotiate a repayment plan with a delinquent contractor, and it seemed to be effective. I will certainly be coming back to my notes before any higher stakes negotiation.
    </div>
 </div>
 
@@ -245,8 +245,8 @@ This list isn't meant to be entirely comprehensive to all books I've read. Most 
 </center>
 <div class="row">
    <div class="column left">
-      <a href="/assets/img/books/demon-haunted-world=cover.jpg">
-      <img src="/assets/img/books/demon-haunted-world=cover.jpg" alt="">
+      <a href="/assets/img/books/demon-haunted-world-cover.jpg">
+      <img src="/assets/img/books/demon-haunted-world-cover.jpg" alt="">
       </a>
    </div>
    <div class="column right">
