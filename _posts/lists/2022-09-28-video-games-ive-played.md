@@ -45,7 +45,19 @@ img {
 }
 
 </style>
-
+---
+<center><h3>God of War: Ragnarok</h3>
+<b>Rating: 10/10</b></center>
+<div class="row">
+   <div class="column left">
+      <a href="/assets/img/video-games/gow-ragnarok.jpg">
+      <img src="/assets/img/video-games/gow-ragnarok.jpg" alt="">
+      </a>
+   </div>
+   <div class="column right">
+   The game represents an episodic revolution from the previous iteration, and while the scope and cast broadens, the same wonderful texture that made the first a masterpiece are all still here: fantastic storytelling, wonderful voice acting, compelling combat, and a hell of a lot of Mimir's stories while traversing (this time, you get dog sleds and weird camel things in addition to row boats). If there are any complaints, it's that Mimir actually wears thin after a while, and the sections where you pass his disembodied head off to another character are certainly welcome reprieves. But this game, like the previous, represents the pinnacle of the genre of action adventure and video games in general, and I can't wait to slay the next pantheon when a sequel comes out.
+   </div>
+</div>
 ---
 <center><h3>Cult of the Lamb</h3>
 <b>Rating: 8/10</b></center>
