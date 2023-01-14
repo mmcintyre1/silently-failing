@@ -43,6 +43,19 @@ This list isn't meant to be entirely comprehensive to all books I've read. Most 
 ---
 <center><h1>Business Books</h1></center>
 ---
+<center><h3>The Design of Everyday Things</h3>
+<b>Rating: 10/10</b></center>
+<div class="row">
+   <div class="column left">
+      <a href="/assets/img/books/the-design-of-everyday-things-cover.jpg">
+      <img src="/assets/img/books/the-design-of-everyday-things-cover.jpg" alt="">
+      </a>
+   </div>
+   <div class="column right">
+    This book has lent me a vocabulary to wield in the battle to build usable systems. It is no exaggeration to say that thinking about usability in the way Norman posits has been the difference between success and failure for systems and processes I've built. This book is canon for user-centered design and for anyone who designs anything to be used by humans. Several times a week, I talk about affordances, and how key to design it is to consider who is using your system, and how you build those affordances and then signify them.
+   </div>
+</div>
+---
 <center><h3>Think Again</h3>
 <b>Rating: 7/10</b></center>
 <div class="row">
@@ -114,6 +127,22 @@ This list isn't meant to be entirely comprehensive to all books I've read. Most 
    </div>
 </div>
 ---
+<center>
+   <h3>Never Split the Difference</h3>
+   <b>Rating: 8/10</b>
+</center>
+<div class="row">
+   <div class="column left">
+      <a href="/assets/img/books/never-split-the-difference-cover.jpg">
+      <img src="/assets/img/books/never-split-the-difference-cover.jpg" alt="">
+      </a>
+   </div>
+   <div class="column right">
+
+   </div>
+</div>
+
+---
 <center><h1>Tech Books</h1></center>
 ---
 
@@ -159,6 +188,21 @@ This list isn't meant to be entirely comprehensive to all books I've read. Most 
    </div>
    <div class="column right">
     Rating this book feels inextricably linked to rating Data Mesh as a framework, which seeks to be the fourth wave of the data revolution, supplanting mutli-modal cloud architectures. While the idea is nice (who wouldn't want to work in a company where you could implement this?), it feels far too idealistic; this would be impossible to implement at the places I've been. There are some interesting ideas, and particularly the idea of a data product, and the book has a wonderful bibliography. Data Mesh is coming out of ThoughtWorks, so it'll have that cache and is worth knowing about even if you never have the good fortune to see even part of a data mesh come to fruition.
+   </div>
+</div>
+---
+<center>
+   <h3>Hackers: Heroes of the Computer Revolution</h3>
+   <b>Rating: 7/10</b>
+</center>
+<div class="row">
+   <div class="column left">
+      <a href="/assets/img/books/hackers-cover.jpg">
+      <img src="/assets/img/books/hackers-cover.jpg" alt="">
+      </a>
+   </div>
+   <div class="column right">
+    This is a now canonical book covering the three generations of hackers, from the Tech Model Railroad Club at MIT in the 60s, to the creation of the first personal computers like the Altair 8800 catering to hobbyists and centered around the Homebrew Computer Club in Silicon Valley, and finally, the book shifts to the nascent video game industry, profiling Sierra On-Line and the decline of the hacker auteur. The book features a memorable ensemble cast and was enjoyable reading for an historian of the human side of the history of computing.
    </div>
 </div>
 ---
