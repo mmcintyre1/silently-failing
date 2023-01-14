@@ -206,6 +206,23 @@ This list isn't meant to be entirely comprehensive to all books I've read. Most 
    </div>
 </div>
 ---
+<center>
+   <h3></h3>
+   <b>Rating: 10/10</b>
+</center>
+<div class="row">
+   <div class="column left">
+      <a href="/assets/img/books/code-cover.jpg">
+      <img src="/assets/img/books/code-cover.jpg" alt="">
+      </a>
+   </div>
+   <div class="column right">
+
+
+   </div>
+</div>
+
+---
 <center><h1>Science Books</h1></center>
 ---
 
