@@ -1,7 +1,7 @@
 ---
 export const prerender = false
 
-import { createClient } from '@supabase/supabase-js'
+import { checkCredentials, createSessionToken } from '../../lib/auth'
 import '../../styles/global.css'
 
 let errorMessage = ''
@@ -11,29 +11,19 @@ if (Astro.request.method === 'POST') {
   const email = form.get('email')?.toString() ?? ''
   const password = form.get('password')?.toString() ?? ''
 
-  if (!email || !password) {
-    errorMessage = 'Email and password are required.'
-  } else {
-    const client = createClient(
-      import.meta.env.SUPABASE_URL,
-      import.meta.env.SUPABASE_ANON_KEY,
-    )
-
-    const { data, error } = await client.auth.signInWithPassword({ email, password })
-
-    if (error || !data.session) {
-      errorMessage = 'Invalid email or password.'
-    } else {
-      Astro.cookies.set('sb-token', data.session.access_token, {
-        httpOnly: true,
-        secure: import.meta.env.PROD,
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 24 * 7,
-        path: '/',
-      })
-      return Astro.redirect('/admin/posts')
-    }
+  if (checkCredentials(email, password)) {
+    const token = await createSessionToken()
+    Astro.cookies.set('admin-token', token, {
+      httpOnly: true,
+      secure: import.meta.env.PROD,
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24 * 7,
+      path: '/',
+    })
+    return Astro.redirect('/admin/posts')
   }
+
+  errorMessage = 'Invalid credentials.'
 }
 ---
 

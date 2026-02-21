@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npx astro telemetry disable:*)",
-      "Bash(npm info:*)"
+      "Bash(npm info:*)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }

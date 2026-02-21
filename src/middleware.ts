@@ -1,8 +1,7 @@
 import { defineMiddleware } from 'astro:middleware'
-import { verifyToken } from './lib/supabase'
+import { verifySessionToken } from './lib/auth'
 
-// Paths under /admin that don't require auth
-const OPEN_PATHS = ['/admin/login']
+const OPEN_PATHS = ['/admin/login', '/api/auth/login']
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url
@@ -12,9 +11,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   if (!isAdminPage && !isProtectedApi) return next()
 
-  const token = context.cookies.get('sb-token')?.value
+  const token = context.cookies.get('admin-token')?.value
 
-  if (!token) {
+  if (!token || !(await verifySessionToken(token))) {
+    context.cookies.delete('admin-token', { path: '/' })
     return isAdminPage
       ? context.redirect('/admin/login')
       : new Response(JSON.stringify({ error: 'Unauthorized' }), {
@@ -23,18 +23,5 @@ export const onRequest = defineMiddleware(async (context, next) => {
         })
   }
 
-  const user = await verifyToken(token)
-
-  if (!user) {
-    context.cookies.delete('sb-token', { path: '/' })
-    return isAdminPage
-      ? context.redirect('/admin/login')
-      : new Response(JSON.stringify({ error: 'Unauthorized' }), {
-          status: 401,
-          headers: { 'Content-Type': 'application/json' },
-        })
-  }
-
-  context.locals.user = user
   return next()
 })
