@@ -1,0 +1,71 @@
+---
+export const prerender = false
+
+import AdminLayout from '../../../layouts/AdminLayout.astro'
+import { getSupabase, type Post } from '../../../lib/supabase'
+
+const db = getSupabase()
+const { data: posts, error } = await db
+  .from('posts')
+  .select('id, title, slug, draft, updated_at, published_at')
+  .order('updated_at', { ascending: false })
+
+const allPosts = (posts ?? []) as Pick<Post, 'id' | 'title' | 'slug' | 'draft' | 'updated_at' | 'published_at'>[]
+
+function fmtDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
+}
+---
+
+<AdminLayout title="Posts">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-lg font-semibold text-stone-900">Posts</h1>
+    <a
+      href="/admin/posts/new"
+      class="text-sm bg-teal-700 text-white font-medium rounded px-3 py-1.5 hover:bg-teal-800 transition-colors"
+    >
+      + New post
+    </a>
+  </div>
+
+  {error && (
+    <p class="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 mb-4">
+      Error loading posts: {error.message}
+    </p>
+  )}
+
+  {allPosts.length === 0 ? (
+    <p class="text-sm text-stone-400 mt-8">No posts yet.</p>
+  ) : (
+    <div class="bg-white border border-stone-200 rounded-lg divide-y divide-stone-100">
+      {allPosts.map((post) => (
+        <div class="flex items-center justify-between px-4 py-3 gap-4">
+          <div class="min-w-0">
+            <a
+              href={`/admin/posts/${post.id}`}
+              class="text-sm font-medium text-stone-900 hover:text-teal-700 transition-colors truncate block"
+            >
+              {post.title || <span class="text-stone-400 italic">Untitled</span>}
+            </a>
+            <p class="text-xs text-stone-400 mt-0.5">
+              {post.slug ? `/${post.slug}` : 'no slug'} · updated {fmtDate(post.updated_at)}
+            </p>
+          </div>
+          <span
+            class={`text-xs px-2 py-0.5 rounded shrink-0 ${
+              post.draft
+                ? 'text-amber-700 bg-amber-50'
+                : 'text-teal-700 bg-teal-50'
+            }`}
+          >
+            {post.draft ? 'Draft' : 'Published'}
+          </span>
+        </div>
+      ))}
+    </div>
+  )}
+</AdminLayout>

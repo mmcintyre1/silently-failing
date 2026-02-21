@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import projectsData from '../data/projects.json'
 
 interface Project {
   name: string
@@ -9,25 +10,7 @@ interface Project {
   status: 'active' | 'in-progress' | 'archived'
 }
 
-// Add your projects here. Each entry becomes a card on this page.
-// For Netlify subdomains, set url to the full deploy URL.
-const projects: Project[] = [
-  {
-    name: 'Framed with Friends',
-    description: 'TODO — add a description.',
-    url: 'https://framedwithfriends.silentlyfailing.com',
-    tags: [],
-    status: 'active',
-  },
-  // Example:
-  // {
-  //   name: 'Project Name',
-  //   description: 'One or two sentences about what this is and why it exists.',
-  //   url: 'https://project.silentlyfailing.com',
-  //   tags: ['react', 'typescript'],
-  //   status: 'active',
-  // },
-]
+const projects = projectsData as Project[]
 
 const statusLabel: Record<Project['status'], string> = {
   active: 'Active',

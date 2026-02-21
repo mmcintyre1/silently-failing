@@ -19,6 +19,9 @@ pnpm-debug.log*
 .env.production
 .env.local
 
+# Netlify
+.netlify/
+
 # macOS
 .DS_Store
 

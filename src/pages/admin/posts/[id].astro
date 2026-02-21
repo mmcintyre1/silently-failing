@@ -1,0 +1,226 @@
+---
+export const prerender = false
+
+import AdminLayout from '../../../layouts/AdminLayout.astro'
+import { getSupabase, type Post } from '../../../lib/supabase'
+
+const { id } = Astro.params
+if (!id) return Astro.redirect('/admin/posts')
+
+const db = getSupabase()
+let errorMessage = ''
+let successMessage = ''
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData()
+  const title = form.get('title')?.toString() ?? ''
+  const slug = form.get('slug')?.toString().trim() ?? ''
+  const description = form.get('description')?.toString() ?? ''
+  const tagsRaw = form.get('tags')?.toString() ?? ''
+  const content = form.get('content')?.toString() ?? ''
+  const tags = tagsRaw
+    .split(',')
+    .map((t) => t.trim())
+    .filter(Boolean)
+
+  if (!slug) {
+    errorMessage = 'Slug is required.'
+  } else {
+    const { error } = await db
+      .from('posts')
+      .update({ title, slug, description, content, tags, updated_at: new Date().toISOString() })
+      .eq('id', id)
+
+    if (error) {
+      errorMessage = error.message
+    } else {
+      successMessage = 'Saved.'
+    }
+  }
+}
+
+const { data: post, error: fetchError } = await db
+  .from('posts')
+  .select('*')
+  .eq('id', id)
+  .single()
+
+if (fetchError || !post) return Astro.redirect('/admin/posts')
+
+const p = post as Post
+const tagsJoined = p.tags.join(', ')
+
+const saved = Astro.url.searchParams.get('saved') === '1'
+---
+
+<AdminLayout title={p.title || 'Edit Post'}>
+  <div class="flex items-center gap-3 mb-6">
+    <a href="/admin/posts" class="text-sm text-stone-400 hover:text-stone-700">← Posts</a>
+    <h1 class="text-lg font-semibold text-stone-900">
+      {p.title || <span class="text-stone-400 italic">Untitled</span>}
+    </h1>
+    <span class={`text-xs px-2 py-0.5 rounded ${p.draft ? 'text-amber-700 bg-amber-50' : 'text-teal-700 bg-teal-50'}`}>
+      {p.draft ? 'Draft' : 'Published'}
+    </span>
+  </div>
+
+  {(successMessage || saved) && (
+    <div class="mb-4 text-sm text-teal-700 bg-teal-50 border border-teal-200 rounded px-3 py-2">
+      Saved successfully.
+    </div>
+  )}
+  {errorMessage && (
+    <div class="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
+      {errorMessage}
+    </div>
+  )}
+
+  <div id="publish-status" class="hidden mb-4 text-sm rounded px-3 py-2"></div>
+
+  <form method="POST" id="post-form" class="flex flex-col gap-4">
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label for="title" class="block text-xs font-medium text-stone-600 mb-1">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={p.title}
+          class="w-full border border-stone-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-white"
+        />
+      </div>
+      <div>
+        <label for="slug" class="block text-xs font-medium text-stone-600 mb-1">
+          Slug
+          {!p.draft && <span class="text-amber-600 font-normal ml-1">(changing breaks the URL)</span>}
+        </label>
+        <input
+          type="text"
+          id="slug"
+          name="slug"
+          value={p.slug}
+          pattern="[a-z0-9-]+"
+          class="w-full border border-stone-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-white font-mono"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label for="description" class="block text-xs font-medium text-stone-600 mb-1">
+        Description
+      </label>
+      <input
+        type="text"
+        id="description"
+        name="description"
+        value={p.description}
+        class="w-full border border-stone-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-white"
+      />
+    </div>
+
+    <div>
+      <label for="tags" class="block text-xs font-medium text-stone-600 mb-1">
+        Tags <span class="text-stone-400 font-normal">(comma-separated)</span>
+      </label>
+      <input
+        type="text"
+        id="tags"
+        name="tags"
+        value={tagsJoined}
+        class="w-full border border-stone-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-white"
+      />
+    </div>
+
+    <!-- Split-pane editor -->
+    <div>
+      <label class="block text-xs font-medium text-stone-600 mb-1">Content</label>
+      <div class="flex gap-3 h-[60vh] min-h-[400px]">
+        <textarea
+          id="editor"
+          name="content"
+          class="flex-1 font-mono text-sm p-4 border border-stone-200 rounded-lg resize-none focus:outline-none focus:border-teal-500 bg-white leading-relaxed"
+        >{p.content}</textarea>
+        <div
+          id="preview"
+          class="flex-1 prose max-w-none p-4 border border-stone-100 rounded-lg overflow-y-auto bg-white text-sm"
+        ></div>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center pt-2">
+      <div class="text-xs text-stone-400">
+        Last updated {new Date(p.updated_at).toLocaleString()}
+      </div>
+      <div class="flex gap-3">
+        <button
+          type="submit"
+          class="text-sm bg-stone-800 text-white font-medium rounded px-4 py-2 hover:bg-stone-900 transition-colors"
+        >
+          Save draft
+        </button>
+        <button
+          type="button"
+          id="publish-btn"
+          class="text-sm bg-teal-700 text-white font-medium rounded px-4 py-2 hover:bg-teal-800 transition-colors disabled:opacity-50"
+        >
+          {p.draft ? 'Publish' : 'Republish'}
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Split-pane markdown preview -->
+  <script>
+    import { marked } from 'marked'
+
+    const editor = document.getElementById('editor') as HTMLTextAreaElement
+    const preview = document.getElementById('preview') as HTMLDivElement
+
+    async function updatePreview() {
+      preview.innerHTML = await marked.parse(editor.value)
+    }
+
+    editor.addEventListener('input', updatePreview)
+    updatePreview()
+  </script>
+
+  <!-- Publish handler -->
+  <script define:vars={{ postId: p.id }}>
+    const btn = document.getElementById('publish-btn')
+    const statusEl = document.getElementById('publish-status')
+
+    function showStatus(msg, type) {
+      statusEl.textContent = msg
+      statusEl.className = `mb-4 text-sm rounded px-3 py-2 ${
+        type === 'error'
+          ? 'text-red-600 bg-red-50 border border-red-200'
+          : 'text-teal-700 bg-teal-50 border border-teal-200'
+      }`
+      statusEl.classList.remove('hidden')
+    }
+
+    btn.addEventListener('click', async () => {
+      btn.disabled = true
+      btn.textContent = 'Publishing…'
+      statusEl.classList.add('hidden')
+
+      try {
+        const res = await fetch(`/api/posts/${postId}/publish`, { method: 'POST' })
+        const data = await res.json()
+
+        if (res.ok) {
+          showStatus('Published! Netlify will rebuild in ~30 seconds.', 'success')
+          btn.textContent = 'Republish'
+        } else {
+          showStatus(`Publish failed: ${data.error}`, 'error')
+          btn.textContent = 'Publish'
+        }
+      } catch (err) {
+        showStatus('Publish failed: network error.', 'error')
+        btn.textContent = 'Publish'
+      } finally {
+        btn.disabled = false
+      }
+    })
+  </script>
+</AdminLayout>

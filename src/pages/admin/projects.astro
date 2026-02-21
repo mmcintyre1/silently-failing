@@ -1,0 +1,240 @@
+---
+export const prerender = false
+
+import AdminLayout from '../../layouts/AdminLayout.astro'
+import { getFile, putFile } from '../../lib/github'
+
+let errorMessage = ''
+let successMessage = ''
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData()
+
+  // Collect all project rows from form fields
+  const projects: Array<{
+    name: string
+    description: string
+    url: string
+    tags: string[]
+    status: string
+  }> = []
+
+  let i = 0
+  while (form.has(`projects[${i}][name]`)) {
+    projects.push({
+      name: form.get(`projects[${i}][name]`)?.toString() ?? '',
+      description: form.get(`projects[${i}][description]`)?.toString() ?? '',
+      url: form.get(`projects[${i}][url]`)?.toString() ?? '',
+      tags: (form.get(`projects[${i}][tags]`)?.toString() ?? '')
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean),
+      status: form.get(`projects[${i}][status]`)?.toString() ?? 'active',
+    })
+    i++
+  }
+
+  try {
+    const file = await getFile('src/data/projects.json')
+    await putFile(
+      'src/data/projects.json',
+      JSON.stringify(projects, null, 2) + '\n',
+      'Update projects via admin',
+      file?.sha,
+    )
+    successMessage = 'Saved and committed. Netlify will rebuild in ~30 seconds.'
+  } catch (err) {
+    errorMessage = err instanceof Error ? err.message : 'Unknown error'
+  }
+}
+
+// Always load current projects from GitHub
+const file = await getFile('src/data/projects.json')
+let projects: Array<{
+  name: string
+  description: string
+  url: string
+  tags: string[]
+  status: string
+}> = []
+
+if (file) {
+  try {
+    projects = JSON.parse(file.content)
+  } catch {
+    errorMessage = 'Could not parse projects.json from GitHub.'
+  }
+}
+
+const STATUS_OPTIONS = ['active', 'in-progress', 'archived']
+---
+
+<AdminLayout title="Projects">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-lg font-semibold text-stone-900">Projects</h1>
+    <p class="text-xs text-stone-400">Changes commit directly to GitHub and trigger a Netlify rebuild.</p>
+  </div>
+
+  {successMessage && (
+    <div class="mb-4 text-sm text-teal-700 bg-teal-50 border border-teal-200 rounded px-3 py-2">
+      {successMessage}
+    </div>
+  )}
+  {errorMessage && (
+    <div class="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
+      {errorMessage}
+    </div>
+  )}
+
+  <form method="POST" id="projects-form">
+    <div id="projects-list" class="flex flex-col gap-4">
+      {projects.map((project, i) => (
+        <div class="project-row bg-white border border-stone-200 rounded-lg p-4">
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">Name</label>
+              <input
+                type="text"
+                name={`projects[${i}][name]`}
+                value={project.name}
+                class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">URL</label>
+              <input
+                type="url"
+                name={`projects[${i}][url]`}
+                value={project.url}
+                class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500 font-mono"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="block text-xs font-medium text-stone-600 mb-1">Description</label>
+            <input
+              type="text"
+              name={`projects[${i}][description]`}
+              value={project.description}
+              class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">
+                Tags <span class="text-stone-400 font-normal">(comma-separated)</span>
+              </label>
+              <input
+                type="text"
+                name={`projects[${i}][tags]`}
+                value={project.tags.join(', ')}
+                class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500"
+              />
+            </div>
+            <div class="flex items-end gap-3">
+              <div class="flex-1">
+                <label class="block text-xs font-medium text-stone-600 mb-1">Status</label>
+                <select
+                  name={`projects[${i}][status]`}
+                  class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500 bg-white"
+                >
+                  {STATUS_OPTIONS.map((s) => (
+                    <option value={s} selected={s === project.status}>{s}</option>
+                  ))}
+                </select>
+              </div>
+              <button
+                type="button"
+                class="remove-row text-xs text-red-500 hover:text-red-700 py-1.5 shrink-0"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-4 flex justify-between items-center">
+      <button
+        type="button"
+        id="add-project"
+        class="text-sm text-teal-700 hover:text-teal-900 font-medium"
+      >
+        + Add project
+      </button>
+      <button
+        type="submit"
+        class="text-sm bg-teal-700 text-white font-medium rounded px-4 py-2 hover:bg-teal-800 transition-colors"
+      >
+        Save &amp; publish
+      </button>
+    </div>
+  </form>
+</AdminLayout>
+
+<script>
+  const list = document.getElementById('projects-list')!
+  const addBtn = document.getElementById('add-project')!
+
+  function rowIndex() {
+    return list.querySelectorAll('.project-row').length
+  }
+
+  function bindRemove(btn: Element) {
+    btn.addEventListener('click', () => {
+      btn.closest('.project-row')?.remove()
+      // Re-index all rows
+      list.querySelectorAll('.project-row').forEach((row, i) => {
+        row.querySelectorAll('[name]').forEach((el) => {
+          const input = el as HTMLInputElement | HTMLSelectElement
+          input.name = input.name.replace(/projects\[\d+\]/, `projects[${i}]`)
+        })
+      })
+    })
+  }
+
+  // Bind existing remove buttons
+  list.querySelectorAll('.remove-row').forEach(bindRemove)
+
+  addBtn.addEventListener('click', () => {
+    const i = rowIndex()
+    const row = document.createElement('div')
+    row.className = 'project-row bg-white border border-stone-200 rounded-lg p-4'
+    row.innerHTML = `
+      <div class="grid grid-cols-2 gap-3 mb-3">
+        <div>
+          <label class="block text-xs font-medium text-stone-600 mb-1">Name</label>
+          <input type="text" name="projects[${i}][name]" class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-stone-600 mb-1">URL</label>
+          <input type="url" name="projects[${i}][url]" class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500 font-mono" />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="block text-xs font-medium text-stone-600 mb-1">Description</label>
+        <input type="text" name="projects[${i}][description]" class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500" />
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-stone-600 mb-1">Tags</label>
+          <input type="text" name="projects[${i}][tags]" class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500" />
+        </div>
+        <div class="flex items-end gap-3">
+          <div class="flex-1">
+            <label class="block text-xs font-medium text-stone-600 mb-1">Status</label>
+            <select name="projects[${i}][status]" class="w-full border border-stone-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-teal-500 bg-white">
+              <option value="active">active</option>
+              <option value="in-progress">in-progress</option>
+              <option value="archived">archived</option>
+            </select>
+          </div>
+          <button type="button" class="remove-row text-xs text-red-500 hover:text-red-700 py-1.5 shrink-0">Remove</button>
+        </div>
+      </div>
+    `
+    list.appendChild(row)
+    bindRemove(row.querySelector('.remove-row')!)
+  })
+</script>
