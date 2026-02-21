@@ -32,7 +32,7 @@ if (Astro.request.method === 'POST') {
       const markdown = buildPostMarkdown({ title, description, content, tags, draft: true })
 
       try {
-        await putFile(filePath, markdown, `Draft post: ${title || slug}`)
+        await putFile(filePath, markdown, `Draft post: ${title || slug} [skip netlify]`)
         return Astro.redirect(`/admin/posts/${slug}?saved=1`)
       } catch (err) {
         errorMessage = err instanceof Error ? err.message : 'Unknown error'

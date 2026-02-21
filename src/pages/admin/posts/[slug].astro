@@ -33,7 +33,7 @@ if (Astro.request.method === 'POST') {
     await putFile(
       filePath,
       markdown,
-      isDraft ? `Update draft: ${title || slug}` : `Publish post: ${title || slug}`,
+      isDraft ? `Update draft: ${title || slug} [skip netlify]` : `Publish post: ${title || slug}`,
       sha,
     )
     successMessage = isDraft ? 'Draft saved.' : 'Published! Netlify will rebuild in ~30 seconds.'
