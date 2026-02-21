@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+
+const posts = await getCollection('posts', ({ data }) => !data.draft)
+
+// Build tag → count map, sorted by count descending then alphabetically
+const tagMap = new Map<string, number>()
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagMap.set(tag, (tagMap.get(tag) ?? 0) + 1)
+  }
+}
+
+const tags = [...tagMap.entries()].sort((a, b) => {
+  if (b[1] !== a[1]) return b[1] - a[1]
+  return a[0].localeCompare(b[0])
+})
+---
+
+<BaseLayout title="Tags — Silently Failing" description="Browse all post tags">
+  <div class="py-12">
+    <h1 class="text-xl font-semibold text-stone-900">Tags</h1>
+    <p class="mt-2 text-sm text-stone-500">
+      {posts.length} post{posts.length !== 1 ? 's' : ''} across {tags.length} tag{tags.length !== 1 ? 's' : ''}
+    </p>
+    <div class="mt-8 flex flex-col divide-y divide-stone-100">
+      {tags.map(([tag, count]) => (
+        <a
+          href={`/tags/${tag}`}
+          class="flex items-baseline justify-between py-3 group"
+        >
+          <span class="text-stone-800 group-hover:text-teal-700 transition-colors duration-150">
+            #{tag}
+          </span>
+          <span class="text-xs text-stone-400 tabular-nums">
+            {count} post{count !== 1 ? 's' : ''}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

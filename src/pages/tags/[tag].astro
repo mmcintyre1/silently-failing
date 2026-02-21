@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PostCard from '../../components/PostCard.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft)
+  const allTags = [...new Set(posts.flatMap((post) => post.data.tags))]
+
+  return allTags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts
+        .filter((post) => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }))
+}
+
+const { tag } = Astro.params
+const { posts } = Astro.props
+---
+
+<BaseLayout title={`#${tag} — Silently Failing`}>
+  <div class="py-12">
+    <div class="flex items-baseline gap-3">
+      <h1 class="text-xl font-semibold text-stone-900">#{tag}</h1>
+      <span class="text-stone-400 text-sm">
+        {posts.length} post{posts.length !== 1 ? 's' : ''}
+      </span>
+    </div>
+    <div class="mt-8">
+      {posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          slug={post.slug}
+          date={post.data.date}
+          description={post.data.description}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+    <div class="pt-5">
+      <a href="/blog" class="text-sm text-teal-700 hover:text-teal-600 transition-colors duration-150">
+        ← All posts
+      </a>
+    </div>
+  </div>
+</BaseLayout>
