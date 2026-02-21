@@ -2,23 +2,28 @@
 export const prerender = false
 
 import AdminLayout from '../../../layouts/AdminLayout.astro'
-import { getSupabase, type Post } from '../../../lib/supabase'
+import { listFiles, getFile, parsePostFrontmatter } from '../../../lib/github'
 
-const db = getSupabase()
-const { data: posts, error } = await db
-  .from('posts')
-  .select('id, title, slug, draft, updated_at, published_at')
-  .order('updated_at', { ascending: false })
+const files = await listFiles('src/content/posts')
 
-const allPosts = (posts ?? []) as Pick<Post, 'id' | 'title' | 'slug' | 'draft' | 'updated_at' | 'published_at'>[]
-
-function fmtDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
-}
+// Fetch each post's frontmatter in parallel
+const posts = (
+  await Promise.all(
+    files.map(async ({ name }) => {
+      const file = await getFile(`src/content/posts/${name}`)
+      if (!file) return null
+      const { title, date, draft } = parsePostFrontmatter(file.content)
+      return {
+        slug: name.replace(/\.md$/, ''),
+        title: title || name.replace(/\.md$/, ''),
+        date,
+        draft,
+      }
+    }),
+  )
+)
+  .filter(Boolean)
+  .sort((a, b) => (b!.date > a!.date ? 1 : -1))
 ---
 
 <AdminLayout title="Posts">
@@ -32,37 +37,30 @@ function fmtDate(iso: string) {
     </a>
   </div>
 
-  {error && (
-    <p class="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 mb-4">
-      Error loading posts: {error.message}
-    </p>
-  )}
-
-  {allPosts.length === 0 ? (
-    <p class="text-sm text-stone-400 mt-8">No posts yet.</p>
+  {posts.length === 0 ? (
+    <p class="text-sm text-stone-400 mt-8">No posts yet. Create one above.</p>
   ) : (
     <div class="bg-white border border-stone-200 rounded-lg divide-y divide-stone-100">
-      {allPosts.map((post) => (
+      {posts.map((post) => (
         <div class="flex items-center justify-between px-4 py-3 gap-4">
           <div class="min-w-0">
             <a
-              href={`/admin/posts/${post.id}`}
+              href={`/admin/posts/${post!.slug}`}
               class="text-sm font-medium text-stone-900 hover:text-teal-700 transition-colors truncate block"
             >
-              {post.title || <span class="text-stone-400 italic">Untitled</span>}
+              {post!.title}
             </a>
             <p class="text-xs text-stone-400 mt-0.5">
-              {post.slug ? `/${post.slug}` : 'no slug'} · updated {fmtDate(post.updated_at)}
+              /{post!.slug}
+              {post!.date && ` · ${post!.date}`}
             </p>
           </div>
           <span
             class={`text-xs px-2 py-0.5 rounded shrink-0 ${
-              post.draft
-                ? 'text-amber-700 bg-amber-50'
-                : 'text-teal-700 bg-teal-50'
+              post!.draft ? 'text-amber-700 bg-amber-50' : 'text-teal-700 bg-teal-50'
             }`}
           >
-            {post.draft ? 'Draft' : 'Published'}
+            {post!.draft ? 'Draft' : 'Published'}
           </span>
         </div>
       ))}

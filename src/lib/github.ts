@@ -55,16 +55,77 @@ export async function putFile(
   return data.content.sha as string
 }
 
+export async function listFiles(
+  dir: string,
+): Promise<Array<{ name: string; sha: string; path: string }>> {
+  const res = await fetch(`${API_BASE}/${dir}?ref=${GITHUB_BRANCH}`, {
+    headers: headers(),
+  })
+  if (!res.ok) return []
+  const data = await res.json()
+  if (!Array.isArray(data)) return []
+  return data
+    .filter(
+      (f: { type: string; name: string }) =>
+        f.type === 'file' && f.name.endsWith('.md') && f.name !== '.gitkeep',
+    )
+    .map((f: { name: string; sha: string; path: string }) => ({
+      name: f.name,
+      sha: f.sha,
+      path: f.path,
+    }))
+}
+
+// Parse frontmatter from a markdown file
+export function parsePostFrontmatter(raw: string): {
+  title: string
+  date: string
+  description: string
+  tags: string[]
+  draft: boolean
+  body: string
+} {
+  const fmMatch = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
+  if (!fmMatch) {
+    return { title: '', date: '', description: '', tags: [], draft: true, body: raw }
+  }
+
+  const fm = fmMatch[1]
+  const body = fmMatch[2].replace(/^\n/, '')
+
+  const getStr = (key: string): string => {
+    const m = fm.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))
+    if (!m) return ''
+    return m[1].trim().replace(/^"(.*)"$/, '$1')
+  }
+
+  const tagsMatch = fm.match(/^tags:\s*\[(.*?)\]/m)
+  const tags = tagsMatch?.[1]?.trim()
+    ? tagsMatch[1]
+        .split(',')
+        .map((t) => t.trim().replace(/^"|"$/g, ''))
+        .filter(Boolean)
+    : []
+
+  return {
+    title: getStr('title'),
+    date: getStr('date'),
+    description: getStr('description'),
+    draft: getStr('draft') !== 'false',
+    tags,
+    body,
+  }
+}
+
 export function buildPostMarkdown(post: {
   title: string
   description: string
   content: string
   tags: string[]
-  published_at: string | null
+  draft: boolean
+  date?: string
 }): string {
-  const date = post.published_at
-    ? post.published_at.split('T')[0]
-    : new Date().toISOString().split('T')[0]
+  const date = post.date ?? new Date().toISOString().split('T')[0]
 
   const lines = [
     '---',
@@ -82,6 +143,7 @@ export function buildPostMarkdown(post: {
       : 'tags: []',
   )
 
+  lines.push(`draft: ${post.draft}`)
   lines.push('---', '', post.content)
 
   return lines.join('\n')

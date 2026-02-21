@@ -2,7 +2,7 @@
 export const prerender = false
 
 import AdminLayout from '../../../layouts/AdminLayout.astro'
-import { getSupabase } from '../../../lib/supabase'
+import { getFile, putFile, buildPostMarkdown } from '../../../lib/github'
 
 let errorMessage = ''
 
@@ -20,18 +20,23 @@ if (Astro.request.method === 'POST') {
 
   if (!slug) {
     errorMessage = 'Slug is required.'
+  } else if (!/^[a-z0-9-]+$/.test(slug)) {
+    errorMessage = 'Slug may only contain lowercase letters, numbers, and hyphens.'
   } else {
-    const db = getSupabase()
-    const { data, error } = await db
-      .from('posts')
-      .insert({ title, slug, description, content, tags, draft: true })
-      .select('id')
-      .single()
+    const filePath = `src/content/posts/${slug}.md`
+    const existing = await getFile(filePath)
 
-    if (error) {
-      errorMessage = error.message
+    if (existing) {
+      errorMessage = `A post with slug "${slug}" already exists.`
     } else {
-      return Astro.redirect(`/admin/posts/${data.id}?saved=1`)
+      const markdown = buildPostMarkdown({ title, description, content, tags, draft: true })
+
+      try {
+        await putFile(filePath, markdown, `Draft post: ${title || slug}`)
+        return Astro.redirect(`/admin/posts/${slug}?saved=1`)
+      } catch (err) {
+        errorMessage = err instanceof Error ? err.message : 'Unknown error'
+      }
     }
   }
 }
@@ -49,7 +54,7 @@ if (Astro.request.method === 'POST') {
     </div>
   )}
 
-  <form method="POST" id="post-form" class="flex flex-col gap-4">
+  <form method="POST" class="flex flex-col gap-4">
     <div class="grid grid-cols-2 gap-4">
       <div>
         <label for="title" class="block text-xs font-medium text-stone-600 mb-1">Title</label>
@@ -63,7 +68,7 @@ if (Astro.request.method === 'POST') {
       </div>
       <div>
         <label for="slug" class="block text-xs font-medium text-stone-600 mb-1">
-          Slug <span class="text-stone-400 font-normal">(URL path, e.g. my-post)</span>
+          Slug <span class="text-stone-400 font-normal">(filename, e.g. my-post)</span>
         </label>
         <input
           type="text"
@@ -77,7 +82,7 @@ if (Astro.request.method === 'POST') {
 
     <div>
       <label for="description" class="block text-xs font-medium text-stone-600 mb-1">
-        Description <span class="text-stone-400 font-normal">(optional — shown in post list)</span>
+        Description <span class="text-stone-400 font-normal">(optional)</span>
       </label>
       <input
         type="text"
@@ -95,12 +100,11 @@ if (Astro.request.method === 'POST') {
         type="text"
         id="tags"
         name="tags"
-        placeholder="books, tech, life"
+        placeholder="books, tech"
         class="w-full border border-stone-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-white"
       />
     </div>
 
-    <!-- Split-pane editor -->
     <div>
       <label class="block text-xs font-medium text-stone-600 mb-1">Content</label>
       <div class="flex gap-3 h-[60vh] min-h-[400px]">
@@ -108,13 +112,13 @@ if (Astro.request.method === 'POST') {
           id="editor"
           name="content"
           class="flex-1 font-mono text-sm p-4 border border-stone-200 rounded-lg resize-none focus:outline-none focus:border-teal-500 bg-white leading-relaxed"
-          placeholder="Write your post in markdown..."
+          placeholder="Write your post in markdown…"
         ></textarea>
         <div
           id="preview"
           class="flex-1 prose max-w-none p-4 border border-stone-100 rounded-lg overflow-y-auto bg-white text-sm"
         >
-          <p class="text-stone-300 italic text-sm">Preview will appear here…</p>
+          <p class="text-stone-300 italic text-sm not-prose">Preview will appear here…</p>
         </div>
       </div>
     </div>
@@ -124,21 +128,17 @@ if (Astro.request.method === 'POST') {
         type="submit"
         class="text-sm bg-stone-800 text-white font-medium rounded px-4 py-2 hover:bg-stone-900 transition-colors"
       >
-        Save draft
+        Save as draft
       </button>
     </div>
   </form>
 
-  <!-- Auto-generate slug from title -->
   <script>
     const titleInput = document.getElementById('title') as HTMLInputElement
     const slugInput = document.getElementById('slug') as HTMLInputElement
     let slugTouched = false
 
-    slugInput.addEventListener('input', () => {
-      slugTouched = true
-    })
-
+    slugInput.addEventListener('input', () => { slugTouched = true })
     titleInput.addEventListener('input', () => {
       if (!slugTouched) {
         slugInput.value = titleInput.value
@@ -150,10 +150,8 @@ if (Astro.request.method === 'POST') {
     })
   </script>
 
-  <!-- Split-pane markdown preview -->
   <script>
     import { marked } from 'marked'
-
     const editor = document.getElementById('editor') as HTMLTextAreaElement
     const preview = document.getElementById('preview') as HTMLDivElement
 

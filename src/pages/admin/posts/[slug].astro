@@ -2,71 +2,69 @@
 export const prerender = false
 
 import AdminLayout from '../../../layouts/AdminLayout.astro'
-import { getSupabase, type Post } from '../../../lib/supabase'
+import { getFile, putFile, buildPostMarkdown, parsePostFrontmatter } from '../../../lib/github'
 
-const { id } = Astro.params
-if (!id) return Astro.redirect('/admin/posts')
+const { slug } = Astro.params
+if (!slug) return Astro.redirect('/admin/posts')
 
-const db = getSupabase()
+const filePath = `src/content/posts/${slug}.md`
 let errorMessage = ''
 let successMessage = ''
 
 if (Astro.request.method === 'POST') {
   const form = await Astro.request.formData()
   const title = form.get('title')?.toString() ?? ''
-  const slug = form.get('slug')?.toString().trim() ?? ''
   const description = form.get('description')?.toString() ?? ''
   const tagsRaw = form.get('tags')?.toString() ?? ''
   const content = form.get('content')?.toString() ?? ''
+  const date = form.get('date')?.toString() ?? ''
+  const sha = form.get('sha')?.toString()
+  const action = form.get('action')?.toString() ?? 'draft'
+  const isDraft = action !== 'publish'
+
   const tags = tagsRaw
     .split(',')
     .map((t) => t.trim())
     .filter(Boolean)
 
-  if (!slug) {
-    errorMessage = 'Slug is required.'
-  } else {
-    const { error } = await db
-      .from('posts')
-      .update({ title, slug, description, content, tags, updated_at: new Date().toISOString() })
-      .eq('id', id)
+  const markdown = buildPostMarkdown({ title, description, content, tags, draft: isDraft, date })
 
-    if (error) {
-      errorMessage = error.message
-    } else {
-      successMessage = 'Saved.'
-    }
+  try {
+    await putFile(
+      filePath,
+      markdown,
+      isDraft ? `Update draft: ${title || slug}` : `Publish post: ${title || slug}`,
+      sha,
+    )
+    successMessage = isDraft ? 'Draft saved.' : 'Published! Netlify will rebuild in ~30 seconds.'
+  } catch (err) {
+    errorMessage = err instanceof Error ? err.message : 'Unknown error'
   }
 }
 
-const { data: post, error: fetchError } = await db
-  .from('posts')
-  .select('*')
-  .eq('id', id)
-  .single()
+// Always reload from GitHub so the form reflects latest state (and gets fresh SHA)
+const file = await getFile(filePath)
+if (!file) return Astro.redirect('/admin/posts')
 
-if (fetchError || !post) return Astro.redirect('/admin/posts')
-
-const p = post as Post
-const tagsJoined = p.tags.join(', ')
-
-const saved = Astro.url.searchParams.get('saved') === '1'
+const post = parsePostFrontmatter(file.content)
+const tagsJoined = post.tags.join(', ')
+const savedParam = Astro.url.searchParams.get('saved') === '1'
 ---
 
-<AdminLayout title={p.title || 'Edit Post'}>
+<AdminLayout title={post.title || slug}>
   <div class="flex items-center gap-3 mb-6">
     <a href="/admin/posts" class="text-sm text-stone-400 hover:text-stone-700">← Posts</a>
-    <h1 class="text-lg font-semibold text-stone-900">
-      {p.title || <span class="text-stone-400 italic">Untitled</span>}
+    <h1 class="text-lg font-semibold text-stone-900 truncate">
+      {post.title || <span class="text-stone-400 italic">Untitled</span>}
     </h1>
-    <span class={`text-xs px-2 py-0.5 rounded ${p.draft ? 'text-amber-700 bg-amber-50' : 'text-teal-700 bg-teal-50'}`}>
-      {p.draft ? 'Draft' : 'Published'}
+    <span class={`text-xs px-2 py-0.5 rounded shrink-0 ${post.draft ? 'text-amber-700 bg-amber-50' : 'text-teal-700 bg-teal-50'}`}>
+      {post.draft ? 'Draft' : 'Published'}
     </span>
   </div>
 
-  {(successMessage || saved) && (
+  {(savedParam || successMessage) && (
     <div class="mb-4 text-sm text-teal-700 bg-teal-50 border border-teal-200 rounded px-3 py-2">
-      Saved successfully.
+      {successMessage || 'Saved.'}
     </div>
   )}
   {errorMessage && (
@@ -75,9 +73,11 @@ const saved = Astro.url.searchParams.get('saved') === '1'
     </div>
   )}
 
-  <div id="publish-status" class="hidden mb-4 text-sm rounded px-3 py-2"></div>
+  <form method="POST" class="flex flex-col gap-4">
+    <!-- Hidden fields passed through the form -->
+    <input type="hidden" name="sha" value={file.sha} />
+    <input type="hidden" name="date" value={post.date} />
 
-  <form method="POST" id="post-form" class="flex flex-col gap-4">
     <div class="grid grid-cols-2 gap-4">
       <div>
         <label for="title" class="block text-xs font-medium text-stone-600 mb-1">Title</label>
@@ -85,22 +85,19 @@ const saved = Astro.url.searchParams.get('saved') === '1'
           type="text"
           id="title"
           name="title"
-          value={p.title}
+          value={post.title}
           class="w-full border border-stone-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-white"
         />
       </div>
       <div>
-        <label for="slug" class="block text-xs font-medium text-stone-600 mb-1">
-          Slug
-          {!p.draft && <span class="text-amber-600 font-normal ml-1">(changing breaks the URL)</span>}
+        <label class="block text-xs font-medium text-stone-600 mb-1">
+          Slug <span class="text-stone-400 font-normal">(filename — change requires renaming the file in GitHub)</span>
         </label>
         <input
           type="text"
-          id="slug"
-          name="slug"
-          value={p.slug}
-          pattern="[a-z0-9-]+"
-          class="w-full border border-stone-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-white font-mono"
+          value={slug}
+          disabled
+          class="w-full border border-stone-100 rounded px-3 py-2 text-sm bg-stone-50 text-stone-400 font-mono cursor-not-allowed"
         />
       </div>
     </div>
@@ -113,7 +110,7 @@ const saved = Astro.url.searchParams.get('saved') === '1'
         type="text"
         id="description"
         name="description"
-        value={p.description}
+        value={post.description}
         class="w-full border border-stone-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-teal-500 bg-white"
       />
     </div>
@@ -131,7 +128,6 @@ const saved = Astro.url.searchParams.get('saved') === '1'
       />
     </div>
 
-    <!-- Split-pane editor -->
     <div>
       <label class="block text-xs font-medium text-stone-600 mb-1">Content</label>
       <div class="flex gap-3 h-[60vh] min-h-[400px]">
@@ -139,7 +135,7 @@ const saved = Astro.url.searchParams.get('saved') === '1'
           id="editor"
           name="content"
           class="flex-1 font-mono text-sm p-4 border border-stone-200 rounded-lg resize-none focus:outline-none focus:border-teal-500 bg-white leading-relaxed"
-        >{p.content}</textarea>
+        >{post.body}</textarea>
         <div
           id="preview"
           class="flex-1 prose max-w-none p-4 border border-stone-100 rounded-lg overflow-y-auto bg-white text-sm"
@@ -149,30 +145,40 @@ const saved = Astro.url.searchParams.get('saved') === '1'
 
     <div class="flex justify-between items-center pt-2">
       <div class="text-xs text-stone-400">
-        Last updated {new Date(p.updated_at).toLocaleString()}
+        {post.date && `Date: ${post.date} · `}/<span class="font-mono">{slug}</span>
+        {!post.draft && (
+          <a
+            href={`/blog/${slug}`}
+            target="_blank"
+            class="ml-2 text-teal-600 hover:text-teal-800"
+          >
+            view post ↗
+          </a>
+        )}
       </div>
       <div class="flex gap-3">
         <button
           type="submit"
+          name="action"
+          value="draft"
           class="text-sm bg-stone-800 text-white font-medium rounded px-4 py-2 hover:bg-stone-900 transition-colors"
         >
           Save draft
         </button>
         <button
-          type="button"
-          id="publish-btn"
-          class="text-sm bg-teal-700 text-white font-medium rounded px-4 py-2 hover:bg-teal-800 transition-colors disabled:opacity-50"
+          type="submit"
+          name="action"
+          value="publish"
+          class="text-sm bg-teal-700 text-white font-medium rounded px-4 py-2 hover:bg-teal-800 transition-colors"
         >
-          {p.draft ? 'Publish' : 'Republish'}
+          {post.draft ? 'Publish' : 'Republish'}
         </button>
       </div>
     </div>
   </form>
 
-  <!-- Split-pane markdown preview -->
   <script>
     import { marked } from 'marked'
-
     const editor = document.getElementById('editor') as HTMLTextAreaElement
     const preview = document.getElementById('preview') as HTMLDivElement
 
@@ -182,45 +188,5 @@ const saved = Astro.url.searchParams.get('saved') === '1'
 
     editor.addEventListener('input', updatePreview)
     updatePreview()
-  </script>
-
-  <!-- Publish handler -->
-  <script define:vars={{ postId: p.id }}>
-    const btn = document.getElementById('publish-btn')
-    const statusEl = document.getElementById('publish-status')
-
-    function showStatus(msg, type) {
-      statusEl.textContent = msg
-      statusEl.className = `mb-4 text-sm rounded px-3 py-2 ${
-        type === 'error'
-          ? 'text-red-600 bg-red-50 border border-red-200'
-          : 'text-teal-700 bg-teal-50 border border-teal-200'
-      }`
-      statusEl.classList.remove('hidden')
-    }
-
-    btn.addEventListener('click', async () => {
-      btn.disabled = true
-      btn.textContent = 'Publishing…'
-      statusEl.classList.add('hidden')
-
-      try {
-        const res = await fetch(`/api/posts/${postId}/publish`, { method: 'POST' })
-        const data = await res.json()
-
-        if (res.ok) {
-          showStatus('Published! Netlify will rebuild in ~30 seconds.', 'success')
-          btn.textContent = 'Republish'
-        } else {
-          showStatus(`Publish failed: ${data.error}`, 'error')
-          btn.textContent = 'Publish'
-        }
-      } catch (err) {
-        showStatus('Publish failed: network error.', 'error')
-        btn.textContent = 'Publish'
-      } finally {
-        btn.disabled = false
-      }
-    })
   </script>
 </AdminLayout>
