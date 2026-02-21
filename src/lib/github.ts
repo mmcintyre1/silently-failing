@@ -1,6 +1,6 @@
-const GITHUB_OWNER = import.meta.env.GITHUB_OWNER ?? 'mmcintyre1'
-const GITHUB_REPO = import.meta.env.GITHUB_REPO ?? 'silently-failing'
-const GITHUB_BRANCH = import.meta.env.GITHUB_BRANCH ?? 'master'
+const GITHUB_OWNER = 'mmcintyre1'
+const GITHUB_REPO = 'silently-failing'
+const GITHUB_BRANCH = 'master'
 
 const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`
 
