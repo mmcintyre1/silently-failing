@@ -1,8 +1,22 @@
 [
   {
     "name": "Framed with Friends",
-    "description": "TODO — add a description.",
+    "description": "Played Framed, with friends. Historical score tracking, friendly competition, yada yada",
     "url": "https://framedwithfriends.silentlyfailing.com",
+    "tags": [],
+    "status": "active"
+  },
+  {
+    "name": "Weather Across The Map",
+    "description": "A spartan weather app to compare weather in two or more places. So you know what you are missing. ",
+    "url": "https://weather.silentlyfailing.com",
+    "tags": [],
+    "status": "active"
+  },
+  {
+    "name": "Music Practice Buddy",
+    "description": "A app for working on scales, chords, and arpeggios in a structured way.",
+    "url": "https://music.silentlyfailing.com",
     "tags": [],
     "status": "active"
   }
